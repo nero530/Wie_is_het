@@ -1,18 +1,9 @@
 package MVPtest.view;
 
-import MVPtest.model.eersteModel;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
-
-import javax.xml.stream.EventFilter;
-
 public class eerstePresenteer {
-    private eersteView view;
+    private Geheel view;
 
-    public eerstePresenteer(eersteView view){
+    public eerstePresenteer(Geheel view){
 
         this.view=view;
         this.addEventFilters();
@@ -34,9 +25,7 @@ public class eerstePresenteer {
     });*/
     }
 
-    private void addEventHandlers(){
-
-
+    private void addEventHandlers() {
 
 
 
@@ -53,8 +42,8 @@ view.getTekstveldje().setText("Er is gedrukt");
 });
 */
 
-    }
 
+    }
 
 
     //updateView is updaten met modelData

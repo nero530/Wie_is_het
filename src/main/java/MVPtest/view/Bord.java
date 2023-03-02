@@ -1,18 +1,14 @@
 package MVPtest.view;
 
-import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class eersteView extends TilePane {
+public class Bord extends TilePane {
     private Rectangle dier;
 
     //private Button myButton;
-    public eersteView() {
+    public Bord() {
 
         this.initialiseNodes();
         this.layoutNodes();
@@ -28,11 +24,13 @@ public class eersteView extends TilePane {
     //niet alleen de nodes, ook
     public void layoutNodes() {
         this.setBackground(Background.fill(Color.SILVER));
-     for(int i=0;i<23;i++) {
-         System.out.println("gedaan");
-         Dier dier=new Dier();
-         //dier.setUserData(i);
-         this.getChildren().addAll(dier);
+     for(int i=0;i<20;i++) {
+
+         Persoon persoon =new Persoon();
+         //persoon.setUserData(i);
+        persoon.getProperties().put("nummer",i);
+         persoon.setId(Integer.toString(i));
+         this.getChildren().addAll(persoon);
      }
 //TilePane.setFill(Color.BLUE);
 //this.getChildren().addAll(tekstveldje,myButton);
@@ -41,7 +39,7 @@ public class eersteView extends TilePane {
     }
 
 
-    Rectangle getRectangle(){
+    Rectangle getDier(){
         return dier;
 
     }

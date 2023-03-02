@@ -1,11 +1,11 @@
 package MVPtest;
 
+import MVPtest.model.Spel;
+import MVPtest.view.Geheel;
 import MVPtest.view.eerstePresenteer;
-import MVPtest.view.eersteView;
+import MVPtest.view.Bord;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -15,24 +15,17 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        eersteView view=new eersteView();
+        Geheel view=new Geheel();
+        Spel model=new Spel();
         eerstePresenteer presenteer=new eerstePresenteer(view);
         Scene scene = new Scene(view);
-        stage.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("mouse click detected! " + mouseEvent.getSource());
-            }
 
-
-
-        });
 
 
 
 
         stage.setTitle("Hello!");
-        //stage.setFullScreen(true);
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
 
