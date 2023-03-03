@@ -50,12 +50,8 @@ allePersonen.add(new Persoon("Evert",false,true,false,false, false,true, Persoon
 allePersonen.add(new Persoon("Filip",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 
 
-
-
-
-
-
 }
+
 
 
 

@@ -1,12 +1,13 @@
 package MVPtest.view;
 
-import MVPtest.model.Persoon;
 import MVPtest.model.Spel;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -46,7 +47,11 @@ public class eerstePresenteer {
         bord.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                String id1=event.getTarget().toString().split("id=")[1].substring(0,2);
+             String id1;
+              if(event.getTarget().toString().contains("id")){
+                  id1 = event.getTarget().toString().split("id=")[1].substring(0, 2);
+
+
                String id;
                 if(id1.contains(",")){
                     id=id1.split(",")[0];
@@ -55,8 +60,10 @@ public class eerstePresenteer {
                     id=id1.split("]")[0];
                 }
                 System.out.println(id);
-                //model.setGekozenPersoon1();
-            }
+                model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
+                System.out.println(model.getGekozenPersoon1().getNaam());
+            }}
+
         });
     }
 
@@ -81,9 +88,22 @@ view.getTekstveldje().setText("Er is gedrukt");
     private void updateView() {
 
  for(int i=0;i<20;i++) {
-    Node doelpersoon= view.getBord().getChildren().get(0);//.getChildren().get(i);//.get(i);
-     System.out.println(doelpersoon);
+     String tekst=model.getSpelbord1().getAllePersonen().get(i).getNaam();
+     VBox X =(VBox)(view.getBord().getChildren().get(i));
+     Text bordnaam=(Text)X.getChildren().get(0);
 
+     bordnaam.setText(tekst);
+
+//Onderstaande code werkt even goed zou he voorzien op ongekend aantal vakjes
+     /*Text naam=new Text(tekst);
+     naam.setId(String.valueOf(i));
+     ImageView fotoPersoon=new ImageView("Cheeseburger.jpg");
+    fotoPersoon.setId(String.valueOf(i));
+     fotoPersoon.setFitHeight(150);
+     fotoPersoon.setFitWidth(150);
+//view.getChildren().
+    view.getBord().getChildren().add(new VBox(naam,fotoPersoon));//.getChildren().get(i);//.get(i);
+    */
 
 
  }
@@ -99,6 +119,15 @@ view.getTekstveldje().setText("Er is gedrukt");
 tekst.setText("Kies Een kaartje");
 
         }
+   else{
+
+       VBox mijnKaartje=view.getMijnKaartje();
+
+       Text tekst=(Text) mijnKaartje.getChildren().get(0);
+       tekst.setText("b");
+
+
+   }
 
 
 }
