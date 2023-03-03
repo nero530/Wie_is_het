@@ -47,13 +47,7 @@ private TextField naam;
         this.getChildren().addAll(naam,fotoDier,soort,vacht);
 
 
-
-
     }
-
-
-
-
 
 
 }

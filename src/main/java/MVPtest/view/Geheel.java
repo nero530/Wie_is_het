@@ -53,4 +53,15 @@ public class Geheel extends GridPane {
         this.add(mijnKaartje,2,2);
     }
 
+    TilePane getBord(){
+
+        return bord ;
+
+    }
+    VBox getMijnKaartje(){
+
+        return mijnKaartje;
+
+    }
+
 }

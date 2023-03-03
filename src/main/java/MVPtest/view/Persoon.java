@@ -10,6 +10,9 @@ public Persoon(){
         setStroke(Color.DARKGOLDENROD);
         setWidth(200);
         setHeight(200);
+
+
 }
 
 }
+

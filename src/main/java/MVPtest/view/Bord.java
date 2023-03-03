@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Bord extends TilePane {
-    private Rectangle dier;
+    private Rectangle persoon;
 
     //private Button myButton;
     public Bord() {
@@ -39,8 +39,8 @@ public class Bord extends TilePane {
     }
 
 
-    Rectangle getDier(){
-        return dier;
+    Rectangle getPersoon(){
+        return persoon;
 
     }
 }
