@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class Geheel extends GridPane {
     private TilePane bord;
@@ -58,6 +59,7 @@ public class Geheel extends GridPane {
         return bord ;
 
     }
+
     VBox getMijnKaartje(){
 
         return mijnKaartje;

@@ -60,4 +60,6 @@ System.out.println(spelbord1.getAllePersonen());
 }
 
 
+
+
 }

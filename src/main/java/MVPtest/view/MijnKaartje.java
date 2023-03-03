@@ -6,10 +6,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class MijnKaartje extends VBox {
-private TextField naam;
-    private ImageView fotoDier;
-    private TextField soort;
-    private TextField vacht;
+private Text naam;
+private ImageView fotoPersoon;
+private Text eenTekst1;
+    private Text eenTekst2;
 
 
     public MijnKaartje() {
@@ -20,31 +20,33 @@ private TextField naam;
     }
 
     public void initialiseNodes() {
-        this.naam=new TextField();
-        this.soort=new TextField();
-        this.vacht=new TextField();
+        this.naam=new Text();
+        this.eenTekst1=new Text();
+        this.eenTekst2=new Text();
 
 
-        this.fotoDier = new ImageView("Cheeseburger.jpg");
+        this.fotoPersoon = new ImageView("Cheeseburger.jpg");
 
 
 
     }
     public void layoutNodes(){
-        fotoDier.isPreserveRatio();
-        fotoDier.setFitHeight(80);
-        fotoDier.setFitWidth(80);
+        fotoPersoon.isPreserveRatio();
+        fotoPersoon.setFitHeight(200);
+        fotoPersoon.setFitWidth(150);
 
         naam.setText("cheeseBurger");
-        naam.setEditable(false);
+
+       // naam.setStyle("-fx-text-fill: inputMijnKaartje");
+
         naam.setMouseTransparent(true);
 
-        soort.setText("zoogdier");
-        soort.setEditable(false);
-        vacht.setText("zwart");
-        vacht.setEditable(false);
+        eenTekst1.setText("");
 
-        this.getChildren().addAll(naam,fotoDier,soort,vacht);
+        eenTekst2.setText("");
+
+
+        this.getChildren().addAll(naam,fotoPersoon,eenTekst1,eenTekst2);
 
 
     }

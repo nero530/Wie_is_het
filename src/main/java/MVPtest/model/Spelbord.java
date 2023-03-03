@@ -29,8 +29,26 @@ public boolean[] mogelijk= new boolean[20];
     public Spelbord(){
     Arrays.fill(mogelijk, true);
 allePersonen.add(new Persoon("Piet",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
-//En nog 19 meer
-System.out.println(mogelijk);
+allePersonen.add(new Persoon("Jan",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Isabel",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Julie",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Bert",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Tom",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Erik",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Jana",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Eliah",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Karel",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Pauline",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Alissa",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Anton",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Jolien",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Brecht",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Seppe",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Sofie ",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Kaily",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Evert",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Filip",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+
 
 
 

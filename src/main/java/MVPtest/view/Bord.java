@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Bord extends TilePane {
-    private Rectangle persoon;
+    private VBox persoon;
 
     //private Button myButton;
     public Bord() {
@@ -30,6 +30,9 @@ public class Bord extends TilePane {
          //persoon.setUserData(i);
         persoon.getProperties().put("nummer",i);
          persoon.setId(Integer.toString(i));
+         persoon.setUserData(Integer.toString(i));
+persoon.getFotoPersoon().setId(Integer.toString(i));
+         persoon.getFotoPersoon().setUserData(Integer.toString(i));
          this.getChildren().addAll(persoon);
      }
 //TilePane.setFill(Color.BLUE);
@@ -39,7 +42,7 @@ public class Bord extends TilePane {
     }
 
 
-    Rectangle getPersoon(){
+    VBox getPersoon(){
         return persoon;
 
     }
