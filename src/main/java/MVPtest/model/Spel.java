@@ -55,11 +55,49 @@ private Spelbord spelbord2;
      this.spelbord2=new Spelbord() ;
  this.spelbord1=new Spelbord() ;
 this.gekozenPersoon1=new Persoon("anoniem",false,false,false,false,false,false, Persoon.Haar.ZWART, Persoon.Ogen.BRUIN);
-this.gekozenPersoon2=new Persoon("anoniem",false,false,false,false,false,false, Persoon.Haar.ZWART, Persoon.Ogen.BRUIN);
-System.out.println(spelbord1.getAllePersonen());
+
+long randomGetal=Math.round(Math.random()*20);
+
+        this.gekozenPersoon2=spelbord1.getAllePersonen().get((int) randomGetal);
+System.out.println(gekozenPersoon2.getNaam());
 }
 
+//Dit is eigenlijk een spelbord method
+public boolean vraagBeantwoorden(String vraag){
+//Het alternatief is met class werken
 
+    //?
+    /* switch(vraag){
+        case vraag.contains("vrouw"):
+
+    }*/
+
+
+    if (vraag.contains("vrouw")){
+        return gekozenPersoon2.isVrouw();
+    }
+    else if(vraag.contains("baard")){
+        return gekozenPersoon2.isBaard();
+    }
+    else if(vraag.contains("snor")){
+        return gekozenPersoon2.isSnor();
+    }
+    else if(vraag.contains("hoofddeksel")){
+        return gekozenPersoon2.isHoofddeksel();
+    }
+    else if(vraag.contains("kaal")){
+        return gekozenPersoon2.isKaal();
+    }
+    else if(vraag.equals("blond")||vraag.equals("bruin")||vraag.equals("zwart")){
+        return gekozenPersoon2.getHaarkleur().toString().equals(vraag);
+    }
+    else {
+        return gekozenPersoon2.getOogkleur().toString().equals(vraag);
+
+    }
+
+
+}
 
 
 }

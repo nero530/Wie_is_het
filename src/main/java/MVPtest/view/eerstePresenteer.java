@@ -5,15 +5,17 @@ import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.w3c.dom.NodeList;
-
+import javafx.event.ActionEvent;
 import java.util.Objects;
 
 public class eerstePresenteer {
@@ -47,27 +49,82 @@ public class eerstePresenteer {
         bord.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-             String id1;
-              if(event.getTarget().toString().contains("id")){
-                  id1 = event.getTarget().toString().split("id=")[1].substring(0, 2);
+                String id1;
+                if (event.getTarget().toString().contains("id")) {
+                    id1 = event.getTarget().toString().split("id=")[1].substring(0, 2);
 
 
-               String id;
-                if(id1.contains(",")){
-                    id=id1.split(",")[0];
+                    String id;
+                    if (id1.contains(",")) {
+                        id = id1.split(",")[0];
+                    } else {
+                        id = id1.split("]")[0];
+                    }
+                    System.out.println(id);
+                    if (view.titel.getText().equals("Kies een kaart")) {
+
+                        model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
+                        System.out.println(model.getGekozenPersoon1().getNaam());
+                        VBox mijnKaartje = view.getMijnKaartje();
+                        Text TekstKaartje = (Text) mijnKaartje.getChildren().get(0);
+                        TekstKaartje.setText(model.getGekozenPersoon1().getNaam());
+                        ImageView ImageKaartje = (ImageView) mijnKaartje.getChildren().get(1);
+
+                        ImageKaartje.setImage(new Image("MogelijkeFotos.PNG"));
+                        ImageKaartje.setVisible(true);
+//Hier ook de foto Aanpassen
+                    }
+
                 }
-                else{
-                    id=id1.split("]")[0];
-                }
-                System.out.println(id);
-                model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
-                System.out.println(model.getGekozenPersoon1().getNaam());
-            }}
+            }
 
         });
-    }
+        Button bevestigbutton=view.getBevestigKnop();
+        bevestigbutton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event) {
+                //Maak getter voor titel
+                System.out.println("JA");
+                if(view.titel.getText().equals("Kies een kaart")&&!model.getGekozenPersoon1().getNaam().equals("anoniem")){
 
-    ;
+                    view.titel.setText("Welke vraag zou je willen stellen?");
+                    view.getVragen().setVisible(true);
+
+
+                }
+                else if(view.titel.getText().equals("Welke vraag zou je willen stellen?")){
+                    if(view.getBevestigKnop().getUserData()!=null){
+
+                      System.out.println(model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString()));
+
+
+
+                    }
+                    System.out.println("fout");
+
+                }}});
+
+        GridPane vragen = view.getVragen();
+
+        for(Node child:   vragen.getChildren()){
+            if(child instanceof Button){
+child.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                //System.out.println(event.getSource().toString().split("'")[1]);
+                            view.getBevestigKnop().setUserData(event.getSource().toString().split("'")[1]);
+                                System.out.println(bevestigbutton.getUserData());
+                            }
+
+
+
+        });
+            }}}
+
+
+       /*
+        });*/
+
 
 
         /*view.getMyButton().setOnAction( new EventHandler<ActionEvent>() {
@@ -105,7 +162,6 @@ view.getTekstveldje().setText("Er is gedrukt");
     view.getBord().getChildren().add(new VBox(naam,fotoPersoon));//.getChildren().get(i);//.get(i);
     */
 
-
  }
 
 
@@ -119,15 +175,7 @@ view.getTekstveldje().setText("Er is gedrukt");
 tekst.setText("Kies Een kaartje");
 
         }
-   else{
 
-       VBox mijnKaartje=view.getMijnKaartje();
-
-       Text tekst=(Text) mijnKaartje.getChildren().get(0);
-       tekst.setText("b");
-
-
-   }
 
 
 }

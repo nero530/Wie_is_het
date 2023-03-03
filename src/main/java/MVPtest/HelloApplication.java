@@ -3,11 +3,8 @@ package MVPtest;
 import MVPtest.model.Spel;
 import MVPtest.view.Geheel;
 import MVPtest.view.eerstePresenteer;
-import MVPtest.view.Bord;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,7 +17,7 @@ public class HelloApplication extends Application {
 
         eerstePresenteer presenteer=new eerstePresenteer(view,model);
         Scene scene = new Scene(view);
-
+        scene.getStylesheets().add("Opmaak.css");
 
 
 

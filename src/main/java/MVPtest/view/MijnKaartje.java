@@ -34,16 +34,15 @@ private Text eenTekst1;
         fotoPersoon.isPreserveRatio();
         fotoPersoon.setFitHeight(200);
         fotoPersoon.setFitWidth(150);
+       // fotoPersoon.getStyleClass().add("hidden2");
+fotoPersoon.setVisible(false);
 
-        naam.setText("cheeseBurger");
 
-       // naam.setStyle("-fx-text-fill: inputMijnKaartje");
+        // naam.setStyle("-fx-text-fill: inputMijnKaartje");
 
-        naam.setMouseTransparent(true);
 
-        eenTekst1.setText("");
 
-        eenTekst2.setText("");
+
 
 
         this.getChildren().addAll(naam,fotoPersoon,eenTekst1,eenTekst2);
