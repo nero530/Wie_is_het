@@ -204,10 +204,10 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
             }
         }
         for (int i = 0; i < haren.size(); i++) {
-            haren.set(i, (Double) Math.abs((haren.get(i) / aantalTrue) - 1.0 / 3.0));
+            haren.set(i, (Double) Math.abs((haren.get(i) / aantalTrue)*3/2 - 0.5));
         }
         for (int i = 0; i < ogen.size(); i++) {
-            ogen.set(i, (Double) Math.abs((ogen.get(i) / aantalTrue) - 1.0 / 3.0));
+            ogen.set(i, (Double) Math.abs((ogen.get(i) / aantalTrue)*3/2 - 0.5));
         }
         for (int i = 0; i < propertiesTellen.size(); i++) {
             propertiesTellen.set(i, (Double) Math.abs((propertiesTellen.get(i) / aantalTrue) - 0.5));
@@ -313,10 +313,10 @@ for(int i=0;i<getSpelbord2().getAllePersonen().size();i++) {
     fields[matchingIndices[willekeur]].setAccessible(true);
     if(fields[matchingIndices[willekeur]].get(spelbord2.getAllePersonen().get(i))!=fields[matchingIndices[willekeur]].get(gekozenPersoon1)){
         //dit is geen setter
-        getSpelbord2().mogelijk[i]=false;
+        getSpelbord2().getMogelijk()[i]=false;
 
     };
-//System.out.println(Arrays.toString(spelbord2.getMogelijk()));
+System.out.println(Arrays.toString(spelbord2.getMogelijk()));
 
 }
 

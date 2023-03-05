@@ -26,16 +26,23 @@ public boolean[] mogelijk= new boolean[20];
         this.mogelijk = mogelijk;
     }
 
+    public void setMogelijkComputer(int index) {
+     boolean[] mogelijk2=this.mogelijk;
+     mogelijk2[index]=false;
+        this.mogelijk = mogelijk2;
+    }
+
+
     public Spelbord(){
     Arrays.fill(mogelijk, true);
 allePersonen.add(new Persoon("Piet",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Jan",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
-allePersonen.add(new Persoon("Isabel",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Isabel",true,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Julie",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Bert",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Tom",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Erik",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
-allePersonen.add(new Persoon("Jana",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
+allePersonen.add(new Persoon("Jana",true,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Eliah",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Karel",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
 allePersonen.add(new Persoon("Pauline",false,true,false,false, false,true, Persoon.Haar.ZWART, Persoon.Ogen.ZWART));
