@@ -60,7 +60,7 @@ public class eerstePresenteer {
                     } else {
                         id = id1.split("]")[0];
                     }
-                    System.out.println(id);
+                   // System.out.println(id);
                     if (view.titel.getText().equals("Kies een kaart")) {
 
                         model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
@@ -75,19 +75,31 @@ public class eerstePresenteer {
 //Hier ook de foto Aanpassen
                     }
                     //getter voor titel
-                    else if (view.titel.getText().equals("Ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")) {
+                    else if (view.titel.getText().equals("Ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")||view.getBevestigKnop().getText().equals("Ja")) {
                    //wat zou notifyAll doen()?
                   //String klasseKaartje= String.valueOf(event.getTarget().getClass());
                    if(! view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")){
                        view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().add("uitgeschakeld");
-                   System.out.println(  view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld"));
+                  // System.out.println(  view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld"));
                    } else {
                        view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().remove("uitgeschakeld");
-
-
                    }
+                  String erStaatErNogMaarEenRecht= model.draaiKaartjeOm(Integer.parseInt(id));
+                  //   String HuidigeTitel=   String.valueOf(view.titel.getText());
+                    if(!erStaatErNogMaarEenRecht.equals("meerDanEen")){
+                    view.titel.setUserData(view.titel.getText());
+                        view.titel.setText("Denk je dat "+erStaatErNogMaarEenRecht+" de persoon is?");
+                        view.getBevestigKnop().setText("Ja");
+                        }
+                    else{
+                        if(view.titel.getUserData()!=null) {
+                            view.titel.setText((String) view.titel.getUserData());
+                            view.titel.setUserData(null);
+                        }
+                        view.getBevestigKnop().setText("Klaar met bord");
 
 
+                    }
                     }
                 }
             }
@@ -98,7 +110,7 @@ public class eerstePresenteer {
             @Override
             public void handle(ActionEvent event) {
                 //Maak getter voor titel
-                System.out.println("JA");
+              //  System.out.println("JA");
                 if(view.titel.getText().equals("Kies een kaart")&&!model.getGekozenPersoon1().getNaam().equals("anoniem")){
 
                     view.titel.setText("Welke vraag zou je willen stellen?");
@@ -109,17 +121,30 @@ public class eerstePresenteer {
                 else if(view.titel.getText().equals("Welke vraag zou je willen stellen?")){
                     if(view.getBevestigKnop().getUserData()!=null){
 
-                      System.out.println(model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString()));
+                     // System.out.println(model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString()));
                       boolean antwoord= model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString());
+                        System.out.println(antwoord);
                       if(antwoord){    view.titel.setText("Ja");}
                       else{view.titel.setText("Nee");}
                         view.getBevestigKnop().setText("Klaar met bord");
                       view.getVragen().setVisible(false);
 
                     }
+                }
+                        if(view.getBevestigKnop().getText().equals("Klaar met bord")){
+
+                            try {
+                                String vraagCompurt=model.computerSteltVraag();
+                            } catch (IllegalAccessException e) {
+                                throw new RuntimeException(e);
+                            }
 
 
-                }}});
+                        }
+
+
+
+            }});
 
         GridPane vragen = view.getVragen();
 
@@ -130,7 +155,7 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             public void handle(MouseEvent event) {
                                 //System.out.println(event.getSource().toString().split("'")[1]);
                             view.getBevestigKnop().setUserData(event.getSource().toString().split("'")[1]);
-                                System.out.println(bevestigbutton.getUserData());
+                               // System.out.println(bevestigbutton.getUserData());
                             }
 
 

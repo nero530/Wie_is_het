@@ -1,5 +1,8 @@
 package MVPtest.model;
 
+import java.lang.reflect.*;
+import java.util.*;
+
 public class Spel {
 
 
@@ -56,7 +59,7 @@ private Spelbord spelbord2;
  this.spelbord1=new Spelbord() ;
 this.gekozenPersoon1=new Persoon("anoniem",false,false,false,false,false,false, Persoon.Haar.ZWART, Persoon.Ogen.BRUIN);
 
-long randomGetal=Math.round(Math.random()*20);
+long randomGetal=Math.round(Math.random()*19);
 
         this.gekozenPersoon2=spelbord1.getAllePersonen().get((int) randomGetal);
 System.out.println(gekozenPersoon2.getNaam());
@@ -71,9 +74,10 @@ public boolean vraagBeantwoorden(String vraag){
         case vraag.contains("vrouw"):
 
     }*/
-System.out.println(vraag.contains("baard"));
+//System.out.println(vraag.contains("baard"));
 
     if (vraag.contains("vrouw")){
+        //System.out.println(vraag.contains("vrouw"));
         return gekozenPersoon2.isVrouw();
     }
     else if(vraag.contains("baard")){
@@ -104,5 +108,77 @@ System.out.println(vraag.contains("baard"));
 
 }
 
+public String draaiKaartjeOm(int id){
 
+spelbord1.getMogelijk()[id]=!spelbord1.getMogelijk()[id];
+System.out.println(spelbord1.getMogelijk()[id]);
+
+int aantalTrue=0;
+for(int i=0;i<spelbord1.getMogelijk().length;i++) {
+    if (spelbord1.getMogelijk()[i]) {
+        aantalTrue++;
+    }
+}
+    if(aantalTrue==1){
+       System.out.println(aantalTrue);
+
+        for(int j=0;j<spelbord1.getMogelijk().length;j++){
+            if(spelbord1.getMogelijk()[j]){
+                return   spelbord1.getAllePersonen().get(j).getNaam();
+            }
+
+            }
+    }
+
+
+     return "meerDanEen";
+
+}
+
+
+    public String computerSteltVraag() throws IllegalAccessException {
+        int aantalTrue=0;
+        for(int i=0;i<spelbord1.getMogelijk().length;i++) {
+            if (spelbord1.getMogelijk()[i]) {
+                aantalTrue++;
+            }
+        }
+        Field[] fields = Persoon.class.getDeclaredFields();
+
+System.out.println(fields.length);
+        ArrayList<Double> propertiesTellen=new ArrayList<Double>( Collections.nCopies(fields.length-1, 0.0));
+        //Het aantal properties niet dynamisch
+        for(int i=0;i<(fields.length-3) ;i++) {
+            for (int j = 0; j < spelbord1.getMogelijk().length; j++) {
+                fields[i+1].setAccessible(true);
+                if(fields[i+1].getName()!=("haarkleur") ||fields[i+1].getName()!=("oogkleur")){
+
+                if(spelbord2.getMogelijk()[j]) {
+                    System.out.println(fields[i + 1].get(spelbord2.getAllePersonen().get(j)));
+                    System.out.println(fields[i+1].getName());
+                    if ((boolean) fields[i + 1].get(spelbord2.getAllePersonen().get(j))) {
+                     //   System.out.println("Gedaan");
+                        propertiesTellen.set(i, propertiesTellen.get(i)+1);
+
+                    }
+                }
+
+                     }
+
+
+            }
+        }
+        for (int i = 0; i < propertiesTellen.size(); i++){
+            propertiesTellen.set(i, (Double) Math.abs((propertiesTellen.get(i)/aantalTrue)-0.5));
+
+
+
+
+
+        }
+System.out.println(Arrays.toString(propertiesTellen.toArray()));
+
+
+        return "null";
+    }
 }
