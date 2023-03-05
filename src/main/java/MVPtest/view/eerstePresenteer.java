@@ -147,10 +147,14 @@ public class eerstePresenteer {
 
                                 if( parseBoolean(vraagComputer[1])) {
                                      positief.setUserData(true);
-                                 }
+                                    negatief.setUserData(false);
+
+                                }
                                  else {
                                      negatief.setUserData(true);
-                                 }
+                                    positief.setUserData(false);
+
+                                }
 
                                 view.getKnoppenPosEnNeg().setVisible(true);
 
@@ -190,7 +194,8 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                                          public void handle(ActionEvent event) {
                                             //Dit werkt, onthouden voor ieder verder gebruik!!!,
                                            final Button target=(Button) event.getTarget();
-                                           if(target.getUserData()=="true") {
+                                             System.out.println(target.getUserData());
+                                           if(parseBoolean(target.getUserData().toString())) {
                                                 view.getBevestigKnop().setVisible(true);
                                                view.getVragen().setVisible(true);
                                                view.getKnoppenPosEnNeg().setVisible(false);
@@ -203,7 +208,8 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
        @Override
        public void handle(ActionEvent event) {
            final Button target=(Button) event.getTarget();
-           if(target.getUserData()=="true") {
+           System.out.println(target.getUserData());
+           if(parseBoolean(target.getUserData().toString())){
                view.getBevestigKnop().setVisible(true);
                view.getVragen().setVisible(true);
                view.getKnoppenPosEnNeg().setVisible(false);

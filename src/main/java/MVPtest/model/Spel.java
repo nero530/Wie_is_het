@@ -151,7 +151,7 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
         Field[] fields = Persoon.class.getDeclaredFields();
 
 //tem.out.println(fields.length);
-        ArrayList<Double> propertiesTellen=new ArrayList<Double>( Collections.nCopies(fields.length-1, 0.0));
+        ArrayList<Double> propertiesTellen=new ArrayList<Double>( Collections.nCopies(fields.length-3, 0.0));
         ArrayList<Double> haren=new ArrayList<Double>( Collections.nCopies(3, 0.0));
         ArrayList<Double> ogen=new ArrayList<Double>( Collections.nCopies(3, 0.0));
 
@@ -171,7 +171,8 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
                         }
                     }
                     if (fields[i + 1].getName().equals("haarkleur")) {
-                        String haarkleur = (String) fields[i + 1].get(spelbord2.getAllePersonen().get(j));
+
+                        String haarkleur = fields[i + 1].get(spelbord2.getAllePersonen().get(j)).toString();
                         switch (haarkleur) {
                             case "ZWART":
                                 haren.set(0, haren.get(0) + 1);
@@ -181,7 +182,9 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
                                 haren.set(2, haren.get(2) + 1);
 
                         }
+                    }
                         if (fields[i + 1].getName().equals("oogkleur")) {
+                            System.out.println("check");
                             String oogkleur = (String) fields[i + 1].get(spelbord2.getAllePersonen().get(j));
 
                             switch (oogkleur) {
@@ -192,21 +195,34 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
                                 case "ZWART":
                                     ogen.set(2, ogen.get(2) + 1);
 
-                            }
+
                         }
                     }
 
 
                 }
             }}
+        for (int i = 0; i < haren.size(); i++) {
+            haren.set(i, (Double) Math.abs((haren.get(i) / aantalTrue) - 1.0/3.0));
+        }
+        for (int i = 0; i < ogen.size(); i++) {
+            ogen.set(i, (Double) Math.abs((ogen.get(i) / aantalTrue) - 1.0/3.0));
+        }
         for (int i = 0; i < propertiesTellen.size(); i++){
             propertiesTellen.set(i, (Double) Math.abs((propertiesTellen.get(i)/aantalTrue)-0.5));
 
-
         }
+
+     propertiesTellen.add(Collections.min( haren));
+        int indexHaren=haren.indexOf(Collections.min(haren));
+    propertiesTellen.add(Collections.min(ogen));
+        int indexOgen=ogen.indexOf(Collections.min(ogen));
+
+System.out.println(propertiesTellen);
+
         Double minimum=Collections.min(propertiesTellen);
         int[] matchingIndices = IntStream.range(0, propertiesTellen.size())
-                .filter(i -> minimum.equals(propertiesTellen.get(i))) // Only keep those indices
+                .filter(i -> minimum.equals(propertiesTellen.get(i)))
                 .toArray();
         int willekeur= (int) Math.round(Math.random()*(matchingIndices.length-1));
        String[]vraag=new String[2];
@@ -238,6 +254,16 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
             }
             case 5 -> {
                 vraag[0] = "Heeft de persoon een baard?";
+                vraag[1] = String.valueOf("");
+                return vraag;
+            }
+            case 6-> {
+                vraag[0] = "Heeft de persoon  haren?";
+                vraag[1] = String.valueOf("");
+                return vraag;
+            }
+            case 7-> {
+                vraag[0] = "Heeft de persoon ogen?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isBaard());
                 return vraag;
             }
