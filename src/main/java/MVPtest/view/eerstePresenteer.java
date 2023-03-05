@@ -129,7 +129,7 @@ public class eerstePresenteer {
                         System.out.println(antwoord);
                       if(antwoord){    view.titel.setText("Ja");}
                       else{view.titel.setText("Nee");}
-                        view.getBevestigKnop().setText("Klaar met bord");
+                        view.getBevestigKnop().setText("Bevestigen");
                       view.getVragen().setVisible(false);
 
                     }

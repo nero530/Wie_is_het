@@ -313,7 +313,7 @@ for(int i=0;i<getSpelbord2().getAllePersonen().size();i++) {
     fields[matchingIndices[willekeur]].setAccessible(true);
     if(fields[matchingIndices[willekeur]].get(spelbord2.getAllePersonen().get(i))!=fields[matchingIndices[willekeur]].get(gekozenPersoon1)){
         //dit is geen setter
-        getSpelbord2().getMogelijk()[i]=false;
+        getSpelbord2().setMogelijkComputer(i);
 
     };
 System.out.println(Arrays.toString(spelbord2.getMogelijk()));
