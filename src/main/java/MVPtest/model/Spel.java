@@ -123,9 +123,10 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
     if (spelbord1.getMogelijk()[i]) {
         aantalTrue++;
     }
-}
+
+}System.out.println(aantalTrue);
     if(aantalTrue==1){
-       //System.out.println(aantalTrue);
+
 
         for(int j=0;j<spelbord1.getMogelijk().length;j++){
             if(spelbord1.getMogelijk()[j]){
@@ -257,76 +258,93 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
 System.out.println(propertiesTellen);
 
         Double minimum=Collections.min(propertiesTellen);
-        int[] matchingIndices = IntStream.range(0, propertiesTellen.size())
+        System.out.println(minimum);
+       int[] matchingIndices = IntStream.range(0, propertiesTellen.size())
                 .filter(i -> minimum.equals(propertiesTellen.get(i)))
                 .toArray();
+        System.out.println(matchingIndices);
         int willekeur= (int) Math.round(Math.random()*(matchingIndices.length-1));
+        System.out.println(Arrays.toString(matchingIndices));
        String[]vraag=new String[2];
         switch (matchingIndices[willekeur]) {
             case 0 -> {
                 vraag[0] = "Is het een vrouw?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isVrouw());
-                return vraag;
+                //return vraag;
             }
             case 1 -> {
                 vraag[0] = "Draagt de persoon een bril?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isBril());
-                return vraag;
+              //  return vraag;
             }
             case 2 -> {
                 vraag[0] = "Is de persoon kaal?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isKaal());
-                return vraag;
+               // return vraag;
             }
             case 3 -> {
                 vraag[0] = "Heeft de persoon een hoofddeksel?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isHoofddeksel());
-                return vraag;
+              //  return vraag;
             }
             case 4 -> {
                 vraag[0] = "Heeft de persoon een snor?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isSnor());
-                return vraag;
+              //  return vraag;
             }
             case 5 -> {
                 vraag[0] = "Heeft de persoon een baard?";
                 vraag[1] = String.valueOf("");
-                return vraag;
+             //   return vraag;
             }
             case 6-> {
                 vraag[0] = "Heeft de persoon " +uiteindelijkeHaarkleur+ "haren?";
+               //te doen
                 vraag[1] = String.valueOf("");
-                return vraag;
+              //  return vraag;
             }
             case 7-> {
                 vraag[0] = "Heeft de persoon "+uiteindelijkeOogkleur+ "ogen?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isBaard());
-                return vraag;
+              //  return vraag;
             }
         }
 //@Testen
       //  System.out.println(Arrays.toString(/*propertiesTellen.toArray()*/matchingIndices));
         //System.out.println(fields[matchingIndices[willekeur]+1]);
-        //System.out.println(vraag[0]);
+        System.out.println("11111");
+       // System.out.println(fields[matchingIndices[willekeur]].get(gekozenPersoon1));
 
 for(int i=0;i<getSpelbord2().getAllePersonen().size();i++) {
-    fields[matchingIndices[willekeur]].setAccessible(true);
-    if(fields[matchingIndices[willekeur]].get(spelbord2.getAllePersonen().get(i))!=fields[matchingIndices[willekeur]].get(gekozenPersoon1)){
+
+    fields[matchingIndices[willekeur]+1].setAccessible(true);
+   //System.out.println(fields[matchingIndices[willekeur]].get(spelbord2.getAllePersonen().get(i)));
+   System.out.println(matchingIndices[willekeur]);
+   System.out.println(willekeur);
+    if(fields[matchingIndices[willekeur]+1].get(spelbord2.getAllePersonen().get(i))!=fields[matchingIndices[willekeur]+1].get(gekozenPersoon1)){
         //dit is geen setter
         getSpelbord2().setMogelijkComputer(i);
+        System.out.println(Arrays.toString(spelbord2.getMogelijk()));
+       //System.out.println(i);
 
     };
-System.out.println(Arrays.toString(spelbord2.getMogelijk()));
+
 
 }
+//Hier klop iets niet
+        int aantalComputerTrue=0;
+    for(int i=0;i<spelbord2.getMogelijk().length;i++) {
+  if(spelbord2.getMogelijk()[i]){
+      aantalComputerTrue++;
 
-        int[] hoeveelTrue  = IntStream.range(0, spelbord2.getMogelijk().length)
-                .filter(i -> spelbord2.getMogelijk()[i])
-                .toArray();
-if(hoeveelTrue.length==1) {
-   vraag[0]="Jij hebt "+ gekozenPersoon1 + ". De computer wint";
-}
-      //  System.out.println(vraag.toString());
+  }
+
+
+    }
+        if (aantalComputerTrue == 1) {
+            vraag[0] = "Jij hebt " + gekozenPersoon1.getNaam() + ". De computer wint";
+        }
+        //  System.out.println(vraag.toString());
 
 return vraag;
     }
