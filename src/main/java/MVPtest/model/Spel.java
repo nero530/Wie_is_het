@@ -142,8 +142,8 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
 
 
     public String[] computerSteltVraag() throws IllegalAccessException {
-        int aantalTrue=0;
-        for(int i=0;i<spelbord1.getMogelijk().length;i++) {
+        int aantalTrue = 0;
+        for (int i = 0; i < spelbord1.getMogelijk().length; i++) {
             if (spelbord1.getMogelijk()[i]) {
                 aantalTrue++;
             }
@@ -151,12 +151,12 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
         Field[] fields = Persoon.class.getDeclaredFields();
 
 //tem.out.println(fields.length);
-        ArrayList<Double> propertiesTellen=new ArrayList<Double>( Collections.nCopies(fields.length-3, 0.0));
-        ArrayList<Double> haren=new ArrayList<Double>( Collections.nCopies(3, 0.0));
-        ArrayList<Double> ogen=new ArrayList<Double>( Collections.nCopies(3, 0.0));
+        ArrayList<Double> propertiesTellen = new ArrayList<Double>(Collections.nCopies(fields.length - 3, 0.0));
+        ArrayList<Double> haren = new ArrayList<Double>(Collections.nCopies(3, 0.0));
+        ArrayList<Double> ogen = new ArrayList<Double>(Collections.nCopies(3, 0.0));
 
         //Het aantal properties
-        for(int i=0;i<(fields.length-2) ;i++) {
+        for (int i = 0; i < (fields.length - 2); i++) {
             for (int j = 0; j < spelbord1.getMogelijk().length; j++) {
                 fields[i + 1].setAccessible(true);
                 if (spelbord2.getMogelijk()[j]) {
@@ -183,17 +183,17 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
 
                         }
                     }
-                        if (fields[i + 1].getName().equals("oogkleur")) {
-                            System.out.println("check");
-                            String oogkleur = (String) fields[i + 1].get(spelbord2.getAllePersonen().get(j));
+                    if (fields[i + 1].getName().equals("oogkleur")) {
+                        System.out.println("check");
+                        String oogkleur = (String) fields[i + 1].get(spelbord2.getAllePersonen().get(j));
 
-                            switch (oogkleur) {
-                                case "GRIJS":
-                                    ogen.set(0, ogen.get(0) + 1);
-                                case "BRUIN":
-                                    ogen.set(1, ogen.get(1) + 1);
-                                case "ZWART":
-                                    ogen.set(2, ogen.get(2) + 1);
+                        switch (oogkleur) {
+                            case "GRIJS":
+                                ogen.set(0, ogen.get(0) + 1);
+                            case "BRUIN":
+                                ogen.set(1, ogen.get(1) + 1);
+                            case "ZWART":
+                                ogen.set(2, ogen.get(2) + 1);
 
 
                         }
@@ -201,22 +201,58 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
 
 
                 }
-            }}
+            }
+        }
         for (int i = 0; i < haren.size(); i++) {
-            haren.set(i, (Double) Math.abs((haren.get(i) / aantalTrue) - 1.0/3.0));
+            haren.set(i, (Double) Math.abs((haren.get(i) / aantalTrue) - 1.0 / 3.0));
         }
         for (int i = 0; i < ogen.size(); i++) {
-            ogen.set(i, (Double) Math.abs((ogen.get(i) / aantalTrue) - 1.0/3.0));
+            ogen.set(i, (Double) Math.abs((ogen.get(i) / aantalTrue) - 1.0 / 3.0));
         }
-        for (int i = 0; i < propertiesTellen.size(); i++){
-            propertiesTellen.set(i, (Double) Math.abs((propertiesTellen.get(i)/aantalTrue)-0.5));
+        for (int i = 0; i < propertiesTellen.size(); i++) {
+            propertiesTellen.set(i, (Double) Math.abs((propertiesTellen.get(i) / aantalTrue) - 0.5));
 
         }
 
-     propertiesTellen.add(Collections.min( haren));
-        int indexHaren=haren.indexOf(Collections.min(haren));
-    propertiesTellen.add(Collections.min(ogen));
-        int indexOgen=ogen.indexOf(Collections.min(ogen));
+        propertiesTellen.add(Collections.min(haren));
+        int indexHaren = haren.indexOf(Collections.min(haren));
+        String uiteindelijkeHaarkleur;
+        switch (indexHaren) {
+            case 0:
+                uiteindelijkeHaarkleur = "grijze";
+                break;
+            case 1:
+                uiteindelijkeHaarkleur = "bruine";
+                break;
+            case 2:
+                uiteindelijkeHaarkleur = "zwarte";
+                break;
+            default:
+                uiteindelijkeHaarkleur = "zwarte";
+
+        }
+
+        propertiesTellen.add(Collections.min(ogen));
+        int indexOgen = ogen.indexOf(Collections.min(ogen));
+        String uiteindelijkeOogkleur;
+        switch (indexOgen) {
+            case 0:
+                uiteindelijkeOogkleur = "zwarte";
+                break;
+            case 1:
+                uiteindelijkeOogkleur = "bruine";
+                break;
+            case 2:
+                uiteindelijkeOogkleur = "blonde";
+                break;
+            default:
+                uiteindelijkeOogkleur = "zwarte";
+
+        }
+
+
+
+
 
 System.out.println(propertiesTellen);
 
@@ -258,12 +294,12 @@ System.out.println(propertiesTellen);
                 return vraag;
             }
             case 6-> {
-                vraag[0] = "Heeft de persoon  haren?";
+                vraag[0] = "Heeft de persoon " +uiteindelijkeHaarkleur+ "haren?";
                 vraag[1] = String.valueOf("");
                 return vraag;
             }
             case 7-> {
-                vraag[0] = "Heeft de persoon ogen?";
+                vraag[0] = "Heeft de persoon "+uiteindelijkeOogkleur+ "ogen?";
                 vraag[1] = String.valueOf(getGekozenPersoon1().isBaard());
                 return vraag;
             }
