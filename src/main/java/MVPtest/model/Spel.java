@@ -2,6 +2,8 @@ package MVPtest.model;
 
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Spel {
 
@@ -172,11 +174,12 @@ System.out.println(fields.length);
             propertiesTellen.set(i, (Double) Math.abs((propertiesTellen.get(i)/aantalTrue)-0.5));
 
 
-
-
-
         }
-System.out.println(Arrays.toString(propertiesTellen.toArray()));
+        Double minimum=Collections.min(propertiesTellen);
+        int[] matchingIndices = IntStream.range(0, propertiesTellen.size())
+                .filter(i -> minimum.equals(propertiesTellen.get(i))) // Only keep those indices
+                .toArray();
+System.out.println(Arrays.toString(/*propertiesTellen.toArray()*/matchingIndices));
 
 
         return "null";
