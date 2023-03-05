@@ -2,10 +2,7 @@ package MVPtest.view;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
@@ -22,6 +19,10 @@ public class Geheel extends GridPane {
     final Label label6 = new Label("");
     final Label label7 = new Label("");
 
+    private HBox knoppenPosEnNeg;
+
+
+
     public Geheel() {
         this.initialiseNodes();
         this.layoutNodes();
@@ -34,6 +35,7 @@ public class Geheel extends GridPane {
         this.mijnKaartje = new MijnKaartje();
         this.vragen=new Vragen();
         this.bevestigKnop=new Button("bevestig Keuze");
+    this.knoppenPosEnNeg=new KnoppenPosEnNeg();
 
     }
 
@@ -51,7 +53,13 @@ public class Geheel extends GridPane {
         this.add(titel,2,0);
         this.add(label5,1,1);
         this.add(label6,1,2);
-     mijnKaartje.setMouseTransparent(true);
+        knoppenPosEnNeg.setVisible(false);
+        this.add(knoppenPosEnNeg,2,3);
+
+
+
+
+        mijnKaartje.setMouseTransparent(true);
 
 
 
@@ -83,6 +91,12 @@ public class Geheel extends GridPane {
     Button getBevestigKnop(){
 
         return bevestigKnop;
+
+    }
+
+    HBox getKnoppenPosEnNeg(){
+
+        return knoppenPosEnNeg;
 
     }
 

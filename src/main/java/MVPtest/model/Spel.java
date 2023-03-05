@@ -1,9 +1,12 @@
 package MVPtest.model;
 
+import MVPtest.view.Vragen;
+
 import java.lang.reflect.*;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static java.lang.Math.random;
 
 public class Spel {
 
@@ -23,7 +26,7 @@ private Spelbord spelbord2;
 
 
     public Persoon getGekozenPersoon1() {
-        System.out.println("ok");
+        //System.out.println("ok");
         return gekozenPersoon1;
     }
 
@@ -61,10 +64,10 @@ private Spelbord spelbord2;
  this.spelbord1=new Spelbord() ;
 this.gekozenPersoon1=new Persoon("anoniem",false,false,false,false,false,false, Persoon.Haar.ZWART, Persoon.Ogen.BRUIN);
 
-long randomGetal=Math.round(Math.random()*19);
+long randomGetal=Math.round(random()*19);
 
         this.gekozenPersoon2=spelbord1.getAllePersonen().get((int) randomGetal);
-System.out.println(gekozenPersoon2.getNaam());
+//tem.out.println(gekozenPersoon2.getNaam());
 }
 
 //Dit is eigenlijk een spelbord method
@@ -113,7 +116,7 @@ public boolean vraagBeantwoorden(String vraag){
 public String draaiKaartjeOm(int id){
 
 spelbord1.getMogelijk()[id]=!spelbord1.getMogelijk()[id];
-System.out.println(spelbord1.getMogelijk()[id]);
+//System.out.println(spelbord1.getMogelijk()[id]);
 
 int aantalTrue=0;
 for(int i=0;i<spelbord1.getMogelijk().length;i++) {
@@ -122,7 +125,7 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
     }
 }
     if(aantalTrue==1){
-       System.out.println(aantalTrue);
+       //System.out.println(aantalTrue);
 
         for(int j=0;j<spelbord1.getMogelijk().length;j++){
             if(spelbord1.getMogelijk()[j]){
@@ -138,7 +141,7 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
 }
 
 
-    public String computerSteltVraag() throws IllegalAccessException {
+    public String[] computerSteltVraag() throws IllegalAccessException {
         int aantalTrue=0;
         for(int i=0;i<spelbord1.getMogelijk().length;i++) {
             if (spelbord1.getMogelijk()[i]) {
@@ -147,29 +150,55 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
         }
         Field[] fields = Persoon.class.getDeclaredFields();
 
-System.out.println(fields.length);
+//tem.out.println(fields.length);
         ArrayList<Double> propertiesTellen=new ArrayList<Double>( Collections.nCopies(fields.length-1, 0.0));
-        //Het aantal properties niet dynamisch
-        for(int i=0;i<(fields.length-3) ;i++) {
+        ArrayList<Double> haren=new ArrayList<Double>( Collections.nCopies(3, 0.0));
+        ArrayList<Double> ogen=new ArrayList<Double>( Collections.nCopies(3, 0.0));
+
+        //Het aantal properties
+        for(int i=0;i<(fields.length-2) ;i++) {
             for (int j = 0; j < spelbord1.getMogelijk().length; j++) {
-                fields[i+1].setAccessible(true);
-                if(fields[i+1].getName()!=("haarkleur") ||fields[i+1].getName()!=("oogkleur")){
+                fields[i + 1].setAccessible(true);
+                if (spelbord2.getMogelijk()[j]) {
+                    if (!fields[i + 1].getName().equals("haarkleur") && !fields[i + 1].getName().equals("oogkleur")) {
 
-                if(spelbord2.getMogelijk()[j]) {
-                    System.out.println(fields[i + 1].get(spelbord2.getAllePersonen().get(j)));
-                    System.out.println(fields[i+1].getName());
-                    if ((boolean) fields[i + 1].get(spelbord2.getAllePersonen().get(j))) {
-                     //   System.out.println("Gedaan");
-                        propertiesTellen.set(i, propertiesTellen.get(i)+1);
 
+                        // System.out.println(fields[i + 1].get(spelbord2.getAllePersonen().get(j)));
+                        // System.out.println(fields[i+1].getName());
+                        if ((boolean) fields[i + 1].get(spelbord2.getAllePersonen().get(j))) {
+                            propertiesTellen.set(i, propertiesTellen.get(i) + 1);
+
+                        }
                     }
+                    if (fields[i + 1].getName().equals("haarkleur")) {
+                        String haarkleur = (String) fields[i + 1].get(spelbord2.getAllePersonen().get(j));
+                        switch (haarkleur) {
+                            case "ZWART":
+                                haren.set(0, haren.get(0) + 1);
+                            case "BRUIN":
+                                haren.set(1, haren.get(1) + 1);
+                            case "BLOND":
+                                haren.set(2, haren.get(2) + 1);
+
+                        }
+                        if (fields[i + 1].getName().equals("oogkleur")) {
+                            String oogkleur = (String) fields[i + 1].get(spelbord2.getAllePersonen().get(j));
+
+                            switch (oogkleur) {
+                                case "GRIJS":
+                                    ogen.set(0, ogen.get(0) + 1);
+                                case "BRUIN":
+                                    ogen.set(1, ogen.get(1) + 1);
+                                case "ZWART":
+                                    ogen.set(2, ogen.get(2) + 1);
+
+                            }
+                        }
+                    }
+
+
                 }
-
-                     }
-
-
-            }
-        }
+            }}
         for (int i = 0; i < propertiesTellen.size(); i++){
             propertiesTellen.set(i, (Double) Math.abs((propertiesTellen.get(i)/aantalTrue)-0.5));
 
@@ -179,9 +208,64 @@ System.out.println(fields.length);
         int[] matchingIndices = IntStream.range(0, propertiesTellen.size())
                 .filter(i -> minimum.equals(propertiesTellen.get(i))) // Only keep those indices
                 .toArray();
-System.out.println(Arrays.toString(/*propertiesTellen.toArray()*/matchingIndices));
+        int willekeur= (int) Math.round(Math.random()*(matchingIndices.length-1));
+       String[]vraag=new String[2];
+        switch (matchingIndices[willekeur]) {
+            case 0 -> {
+                vraag[0] = "Is het een vrouw?";
+                vraag[1] = String.valueOf(getGekozenPersoon1().isVrouw());
+                return vraag;
+            }
+            case 1 -> {
+                vraag[0] = "Draagt de persoon een bril?";
+                vraag[1] = String.valueOf(getGekozenPersoon1().isBril());
+                return vraag;
+            }
+            case 2 -> {
+                vraag[0] = "Is de persoon kaal?";
+                vraag[1] = String.valueOf(getGekozenPersoon1().isKaal());
+                return vraag;
+            }
+            case 3 -> {
+                vraag[0] = "Heeft de persoon een hoofddeksel?";
+                vraag[1] = String.valueOf(getGekozenPersoon1().isHoofddeksel());
+                return vraag;
+            }
+            case 4 -> {
+                vraag[0] = "Heeft de persoon een snor?";
+                vraag[1] = String.valueOf(getGekozenPersoon1().isSnor());
+                return vraag;
+            }
+            case 5 -> {
+                vraag[0] = "Heeft de persoon een baard?";
+                vraag[1] = String.valueOf(getGekozenPersoon1().isBaard());
+                return vraag;
+            }
+        }
+//@Testen
+      //  System.out.println(Arrays.toString(/*propertiesTellen.toArray()*/matchingIndices));
+        //System.out.println(fields[matchingIndices[willekeur]+1]);
+        //System.out.println(vraag[0]);
 
+for(int i=0;i<getSpelbord2().getAllePersonen().size();i++) {
+    fields[matchingIndices[willekeur]].setAccessible(true);
+    if(fields[matchingIndices[willekeur]].get(spelbord2.getAllePersonen().get(i))!=fields[matchingIndices[willekeur]].get(gekozenPersoon1)){
+        //dit is geen setter
+        getSpelbord2().mogelijk[i]=false;
 
-        return "null";
+    };
+//System.out.println(Arrays.toString(spelbord2.getMogelijk()));
+
+}
+
+        int[] hoeveelTrue  = IntStream.range(0, spelbord2.getMogelijk().length)
+                .filter(i -> spelbord2.getMogelijk()[i])
+                .toArray();
+if(hoeveelTrue.length==1) {
+   vraag[0]="Jij hebt "+ gekozenPersoon1 + ". De computer wint";
+}
+      //  System.out.println(vraag.toString());
+
+return vraag;
     }
 }

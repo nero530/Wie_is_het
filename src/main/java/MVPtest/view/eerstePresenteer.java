@@ -11,12 +11,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.w3c.dom.NodeList;
 import javafx.event.ActionEvent;
 import java.util.Objects;
+
+import static java.lang.Boolean.parseBoolean;
 
 public class eerstePresenteer {
     private final Geheel view;
@@ -75,8 +78,8 @@ public class eerstePresenteer {
 //Hier ook de foto Aanpassen
                     }
                     //getter voor titel
-                    else if (view.titel.getText().equals("Ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")||view.getBevestigKnop().getText().equals("Ja")) {
-                   //wat zou notifyAll doen()?
+                    else if ((view.titel.getText().equals("Ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")||view.getBevestigKnop().getText().equals("Ja"))&&(view.titel.getText().charAt(view.titel.getText().length()-1)!='?'&&view.titel.getText().charAt(view.titel.getText().length()-1)!='!')) {
+                        System.out.println(view.titel.getText().charAt(view.titel.getText().length()-1));
                   //String klasseKaartje= String.valueOf(event.getTarget().getClass());
                    if(! view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")){
                        view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().add("uitgeschakeld");
@@ -133,8 +136,24 @@ public class eerstePresenteer {
                 }
                         if(view.getBevestigKnop().getText().equals("Klaar met bord")){
 
+
                             try {
-                                String vraagCompurt=model.computerSteltVraag();
+                                String[] vraagComputer=model.computerSteltVraag();
+
+                                view.titel.setText(vraagComputer[0]);
+                                bevestigbutton.setVisible(false);
+                                Button positief= (Button) view.getKnoppenPosEnNeg().getChildren().get(0);
+                                Button negatief= (Button) view.getKnoppenPosEnNeg().getChildren().get(1);
+
+                                if( parseBoolean(vraagComputer[1])) {
+                                     positief.setUserData(true);
+                                 }
+                                 else {
+                                     negatief.setUserData(true);
+                                 }
+
+                                view.getKnoppenPosEnNeg().setVisible(true);
+
                             } catch (IllegalAccessException e) {
                                 throw new RuntimeException(e);
                             }
@@ -161,7 +180,40 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 
         });
-            }}}
+            }}
+
+         Button pos= (Button) view.getKnoppenPosEnNeg().getChildren().get(0);
+        Button neg= (Button) view.getKnoppenPosEnNeg().getChildren().get(1);
+//Dit moet 1 handler worden voor beide knoppen.
+        pos.setOnAction(new EventHandler<ActionEvent>() {
+                                         @Override
+                                         public void handle(ActionEvent event) {
+                                            //Dit werkt, onthouden voor ieder verder gebruik!!!,
+                                           final Button target=(Button) event.getTarget();
+                                           if(target.getUserData()=="true") {
+                                                view.getBevestigKnop().setVisible(true);
+                                               view.getVragen().setVisible(true);
+                                               view.getKnoppenPosEnNeg().setVisible(false);
+                                                view.titel.setText("Welke vraag zou je willen stellen?");
+                                           }
+
+                                         }
+                                     });
+   neg.setOnAction(new EventHandler<ActionEvent>() {
+       @Override
+       public void handle(ActionEvent event) {
+           final Button target=(Button) event.getTarget();
+           if(target.getUserData()=="true") {
+               view.getBevestigKnop().setVisible(true);
+               view.getVragen().setVisible(true);
+               view.getKnoppenPosEnNeg().setVisible(false);
+               view.titel.setText("Welke vraag zou je willen stellen?");
+           }
+       }
+   });
+
+
+    };
 
 
        /*
