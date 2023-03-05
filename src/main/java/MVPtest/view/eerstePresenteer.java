@@ -74,7 +74,21 @@ public class eerstePresenteer {
                         ImageKaartje.setVisible(true);
 //Hier ook de foto Aanpassen
                     }
+                    //getter voor titel
+                    else if (view.titel.getText().equals("Ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")) {
+                   //wat zou notifyAll doen()?
+                  //String klasseKaartje= String.valueOf(event.getTarget().getClass());
+                   if(! view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")){
+                       view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().add("uitgeschakeld");
+                   System.out.println(  view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld"));
+                   } else {
+                       view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().remove("uitgeschakeld");
 
+
+                   }
+
+
+                    }
                 }
             }
 
@@ -96,11 +110,14 @@ public class eerstePresenteer {
                     if(view.getBevestigKnop().getUserData()!=null){
 
                       System.out.println(model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString()));
-
-
+                      boolean antwoord= model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString());
+                      if(antwoord){    view.titel.setText("Ja");}
+                      else{view.titel.setText("Nee");}
+                        view.getBevestigKnop().setText("Klaar met bord");
+                      view.getVragen().setVisible(false);
 
                     }
-                    System.out.println("fout");
+
 
                 }}});
 

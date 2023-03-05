@@ -71,7 +71,7 @@ public boolean vraagBeantwoorden(String vraag){
         case vraag.contains("vrouw"):
 
     }*/
-
+System.out.println(vraag.contains("baard"));
 
     if (vraag.contains("vrouw")){
         return gekozenPersoon2.isVrouw();
@@ -88,11 +88,16 @@ public boolean vraagBeantwoorden(String vraag){
     else if(vraag.contains("kaal")){
         return gekozenPersoon2.isKaal();
     }
+    else if(vraag.contains("bril")){
+        return gekozenPersoon2.isBril();
+    }
+
     else if(vraag.equals("blond")||vraag.equals("bruin")||vraag.equals("zwart")){
-        return gekozenPersoon2.getHaarkleur().toString().equals(vraag);
+        return gekozenPersoon2.getHaarkleur().toString().toLowerCase().equals(vraag);
     }
     else {
-        return gekozenPersoon2.getOogkleur().toString().equals(vraag);
+
+        return gekozenPersoon2.getOogkleur().toString().toLowerCase().equals(vraag);
 
     }
 

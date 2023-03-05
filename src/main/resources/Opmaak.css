@@ -21,4 +21,7 @@ button{
 
 }
 
+.uitgeschakeld{
+-fx-background-color:"red"
 
+}
