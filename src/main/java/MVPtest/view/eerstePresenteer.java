@@ -78,7 +78,7 @@ public class eerstePresenteer {
 //Hier ook de foto Aanpassen
                     }
                     //getter voor titel
-                    else if ((view.titel.getText().equals("Ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")||view.getBevestigKnop().getText().equals("Ja"))&&(view.titel.getText().charAt(view.titel.getText().length()-1)!='?'&&view.titel.getText().charAt(view.titel.getText().length()-1)!='!')) {
+                    else if ((view.titel.getText().equals("ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")||view.getBevestigKnop().getText().equals("Ja"))&&(view.titel.getText().charAt(view.titel.getText().length()-1)!='?'&&view.titel.getText().charAt(view.titel.getText().length()-1)!='!'|| view.getBevestigKnop().getText().equalsIgnoreCase("ja"))) {
                         System.out.println(view.titel.getText().charAt(view.titel.getText().length()-1));
                   //String klasseKaartje= String.valueOf(event.getTarget().getClass());
                    if(! view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")){
@@ -129,18 +129,20 @@ public class eerstePresenteer {
                         System.out.println(antwoord);
                       if(antwoord){    view.titel.setText("Ja");}
                       else{view.titel.setText("Nee");}
-                        view.getBevestigKnop().setText("Bevestigen");
+                        view.getBevestigKnop().setText("Klaar met bord"); // gewijzigd
                       view.getVragen().setVisible(false);
 
                     }
                 }
-                        if(view.getBevestigKnop().getText().equals("Klaar met bord")){
+                  else if(view.getBevestigKnop().getText().equals("Klaar met bord")){
 
 
                             try {
                                 String[] vraagComputer=model.computerSteltVraag();
 
                                 view.titel.setText(vraagComputer[0]);
+                                bevestigbutton.setText("Bevestigen");
+
                                 bevestigbutton.setVisible(false);
                                 Button positief= (Button) view.getKnoppenPosEnNeg().getChildren().get(0);
                                 Button negatief= (Button) view.getKnoppenPosEnNeg().getChildren().get(1);
