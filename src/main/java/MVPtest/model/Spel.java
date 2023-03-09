@@ -118,10 +118,12 @@ public String draaiKaartjeOm(int id){
 spelbord1.getMogelijk()[id]=!spelbord1.getMogelijk()[id];
 //System.out.println(spelbord1.getMogelijk()[id]);
 
+
 int aantalTrue=0;
 for(int i=0;i<spelbord1.getMogelijk().length;i++) {
     if (spelbord1.getMogelijk()[i]) {
         aantalTrue++;
+
     }
 
 }System.out.println(aantalTrue);
@@ -136,7 +138,7 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
             }
     }
 
-
+//System.out.println(aantalTrue);
      return "meerDanEen";
 
 }
@@ -144,8 +146,8 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
 
     public String[] computerSteltVraag() throws IllegalAccessException {
         int aantalTrue = 0;
-        for (int i = 0; i < spelbord1.getMogelijk().length; i++) {
-            if (spelbord1.getMogelijk()[i]) {
+        for (int i = 0; i < spelbord2.getMogelijk().length; i++) {
+            if (spelbord2.getMogelijk()[i]) {
                 aantalTrue++;
             }
         }
@@ -255,16 +257,16 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
 
 
 
-System.out.println(propertiesTellen);
+//System.out.println(propertiesTellen);
 
         Double minimum=Collections.min(propertiesTellen);
-        System.out.println(minimum);
+      //  System.out.println(minimum);
        int[] matchingIndices = IntStream.range(0, propertiesTellen.size())
                 .filter(i -> minimum.equals(propertiesTellen.get(i)))
                 .toArray();
-        System.out.println(matchingIndices);
+     //   System.out.println(matchingIndices);
         int willekeur= (int) Math.round(Math.random()*(matchingIndices.length-1));
-        System.out.println(Arrays.toString(matchingIndices));
+        //System.out.println(Arrays.toString(matchingIndices));
        String[]vraag=new String[2];
         switch (matchingIndices[willekeur]) {
             case 0 -> {
@@ -312,7 +314,7 @@ System.out.println(propertiesTellen);
 //@Testen
       //  System.out.println(Arrays.toString(/*propertiesTellen.toArray()*/matchingIndices));
         //System.out.println(fields[matchingIndices[willekeur]+1]);
-        System.out.println("11111");
+ //       System.out.println("11111");
        // System.out.println(fields[matchingIndices[willekeur]].get(gekozenPersoon1));
 
 for(int i=0;i<getSpelbord2().getAllePersonen().size();i++) {
