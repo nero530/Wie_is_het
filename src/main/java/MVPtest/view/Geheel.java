@@ -65,7 +65,7 @@ public class Geheel extends GridPane {
 
 
         this.add(bord,1,1,1,3);
-        this.add(mijnKaartje,2,3);
+        this.add(mijnKaartje,3,1);
         // @BUG
         this.vragen.setVisible(false);
         this.add(vragen,2,1,1,2);

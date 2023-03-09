@@ -1,5 +1,6 @@
 package MVPtest.view;
 
+import MVPtest.model.Persoon;
 import MVPtest.model.Spel;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import javafx.scene.text.Text;
 import org.w3c.dom.NodeList;
 import javafx.event.ActionEvent;
 import java.util.Objects;
+
 
 import static java.lang.Boolean.parseBoolean;
 
@@ -69,8 +71,56 @@ public class eerstePresenteer {
                         model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
                         System.out.println(model.getGekozenPersoon1().getNaam());
                         VBox mijnKaartje = view.getMijnKaartje();
-                        Text TekstKaartje = (Text) mijnKaartje.getChildren().get(0);
-                        TekstKaartje.setText(model.getGekozenPersoon1().getNaam());
+                        Text naamKaartje = (Text) mijnKaartje.getChildren().get(0);
+                        naamKaartje.setText(model.getGekozenPersoon1().getNaam());
+                        Text geslacht = (Text) mijnKaartje.getChildren().get(2);
+                         if(!model.getGekozenPersoon1().isVrouw()){
+                            geslacht.setText("♂");}
+                         else{geslacht.setText("♀");}
+                        Text bril = (Text) mijnKaartje.getChildren().get(3);
+                        if(!model.getGekozenPersoon1().isBril()){
+                            bril.setText("bril: \uD83D\uDDF8");}
+                        else{bril.setText("bril: ❌");}
+                        Text baard = (Text) mijnKaartje.getChildren().get(4);
+                        if(!model.getGekozenPersoon1().isBaard()){
+                            baard.setText("baard: \uD83D\uDDF8");}
+                        else{baard.setText("baard:❌");}
+                        Text kaal = (Text) mijnKaartje.getChildren().get(5);
+                        if(!model.getGekozenPersoon1().isKaal()){
+                            kaal.setText("kaal: \uD83D\uDDF8");}
+                        else{kaal.setText("kaal: ❌");}
+                        Text hoofddeksel = (Text) mijnKaartje.getChildren().get(6);
+                        if(!model.getGekozenPersoon1().isHoofddeksel()){
+                            hoofddeksel.setText("hoofddeksel: \uD83D\uDDF8");}
+                        else{hoofddeksel.setText("hoofddeksel: ❌");}
+                        Text snor = (Text) mijnKaartje.getChildren().get(7);
+                        if(!model.getGekozenPersoon1().isSnor()){
+                            snor.setText("snor: \uD83D\uDDF8");}
+                        else{snor.setText("hoofddeksel: ❌");}
+
+
+
+                        Text ogen = (Text) mijnKaartje.getChildren().get(8);
+                        if ("GRIJS".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur())) ) {
+                            ogen.setText("oogkleur: Grijs");
+                        }
+                        else if ("BRUIN".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur())) ) {
+                            ogen.setText("oogkleur: Bruin");
+                        }
+                       else if ("ZWART".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur())) ) {
+                            ogen.setText("oogkleur:Zwart");
+                        }
+                        Text haren = (Text) mijnKaartje.getChildren().get(9);
+                        if ("ZWART".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur())) ) {
+                            haren.setText("haarkleur: Zwart");
+                        }
+                        if ("BRUIN".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur())) ) {
+                            haren.setText("haarkleur: Bruin");
+                        }
+                        if ("BLOND".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur())) ) {
+                            haren.setText("haarkleur:blond");
+                        }
+
                         ImageView ImageKaartje = (ImageView) mijnKaartje.getChildren().get(1);
 
                         ImageKaartje.setImage(new Image("MogelijkeFotos.PNG"));

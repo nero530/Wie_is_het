@@ -220,16 +220,16 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
         String uiteindelijkeHaarkleur;
         switch (indexHaren) {
             case 0:
-                uiteindelijkeHaarkleur = "grijze";
+                uiteindelijkeHaarkleur = " grijze";
                 break;
             case 1:
-                uiteindelijkeHaarkleur = "bruine";
+                uiteindelijkeHaarkleur = " bruine";
                 break;
             case 2:
-                uiteindelijkeHaarkleur = "zwarte";
+                uiteindelijkeHaarkleur = " zwarte";
                 break;
             default:
-                uiteindelijkeHaarkleur = "zwarte";
+                uiteindelijkeHaarkleur = " zwarte";
 
         }
 
@@ -238,16 +238,16 @@ for(int i=0;i<spelbord1.getMogelijk().length;i++) {
         String uiteindelijkeOogkleur;
         switch (indexOgen) {
             case 0:
-                uiteindelijkeOogkleur = "zwarte";
+                uiteindelijkeOogkleur = " zwarte";
                 break;
             case 1:
-                uiteindelijkeOogkleur = "bruine";
+                uiteindelijkeOogkleur = " bruine";
                 break;
             case 2:
-                uiteindelijkeOogkleur = "blonde";
+                uiteindelijkeOogkleur = " blonde";
                 break;
             default:
-                uiteindelijkeOogkleur = "zwarte";
+                uiteindelijkeOogkleur = " zwarte";
 
         }
 
@@ -294,7 +294,7 @@ System.out.println(propertiesTellen);
             }
             case 5 -> {
                 vraag[0] = "Heeft de persoon een baard?";
-                vraag[1] = String.valueOf("");
+                vraag[1] = String.valueOf(getGekozenPersoon1().isBaard());
              //   return vraag;
             }
             case 6-> {
