@@ -3,6 +3,7 @@ package MVPtest.view;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class Vragen extends GridPane {
 private Button vraagEen;
@@ -20,8 +21,8 @@ private Button haarKleurBlond;
 private Button haarKleurZwart;
 private Button haarKleurBruin;
 
-
-
+private HBox haarKleuren;
+private HBox oogKleuren;
 
 
 
@@ -46,6 +47,8 @@ private Button haarKleurBruin;
         haarKleurBlond=new Button("blond");
         haarKleurZwart=new Button("zwart");
         haarKleurBruin=new Button("bruin");
+        oogKleuren=new HBox(oogkleurBlauw,oogkleurBruin,oogkleurGrijs);
+        haarKleuren=new HBox(haarKleurBlond,haarKleurZwart,haarKleurBruin);
 
 
 
@@ -64,13 +67,12 @@ this.add(vraagVier,0,3);
 this.add(vraagVijf,0,4);
 this.add(vraagZes,0,5);
 this.add(vraagZeven,0,6);
-this.add(oogkleurBlauw,0,7);
-this.add(oogkleurBruin,1,7);
-this.add(oogkleurGrijs,2,7);
+
 this.add(vraagAcht,0,8);
-this.add(haarKleurBlond,0,9);
-this.add(haarKleurZwart,1,9);
-this.add(haarKleurBruin,2,9);
+this.add(haarKleuren,0,9);
+ this.add(oogKleuren,0,7);
+this.setVgap(5);
+
 
    }
 

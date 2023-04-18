@@ -1,4 +1,5 @@
 package MVPtest.view;
+import MVPtest.HelloApplication;
 
 import MVPtest.model.Persoon;
 import MVPtest.model.Spel;
@@ -6,19 +7,33 @@ import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.w3c.dom.NodeList;
 import javafx.event.ActionEvent;
+
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 
 import static java.lang.Boolean.parseBoolean;
@@ -47,6 +62,7 @@ public class eerstePresenteer {
 
 
     });*/
+
     }
 
     private void addEventHandlers() {
@@ -65,97 +81,183 @@ public class eerstePresenteer {
                     } else {
                         id = id1.split("]")[0];
                     }
-                   // System.out.println(id);
-                    if (view.titel.getText().equals("Kies een kaart")) {
+                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+                        System.out.println(event.getClickCount());
+                        if (view.titel.getText().equals("Kies een kaart")) {
 
-                        model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
-                        System.out.println(model.getGekozenPersoon1().getNaam());
-                        VBox mijnKaartje = view.getMijnKaartje();
-                        Text naamKaartje = (Text) mijnKaartje.getChildren().get(0);
-                        naamKaartje.setText(model.getGekozenPersoon1().getNaam());
-                        Text geslacht = (Text) mijnKaartje.getChildren().get(2);
-                         if(!model.getGekozenPersoon1().isVrouw()){
-                            geslacht.setText("♂");}
-                         else{geslacht.setText("♀");}
-                        Text bril = (Text) mijnKaartje.getChildren().get(3);
-                        if(!model.getGekozenPersoon1().isBril()){
-                            bril.setText("bril: \uD83D\uDDF8");}
-                        else{bril.setText("bril: ❌");}
-                        Text baard = (Text) mijnKaartje.getChildren().get(4);
-                        if(!model.getGekozenPersoon1().isBaard()){
-                            baard.setText("baard: \uD83D\uDDF8");}
-                        else{baard.setText("baard:❌");}
-                        Text kaal = (Text) mijnKaartje.getChildren().get(5);
-                        if(!model.getGekozenPersoon1().isKaal()){
-                            kaal.setText("kaal: \uD83D\uDDF8");}
-                        else{kaal.setText("kaal: ❌");}
-                        Text hoofddeksel = (Text) mijnKaartje.getChildren().get(6);
-                        if(!model.getGekozenPersoon1().isHoofddeksel()){
-                            hoofddeksel.setText("hoofddeksel: \uD83D\uDDF8");}
-                        else{hoofddeksel.setText("hoofddeksel: ❌");}
-                        Text snor = (Text) mijnKaartje.getChildren().get(7);
-                        if(!model.getGekozenPersoon1().isSnor()){
-                            snor.setText("snor: \uD83D\uDDF8");}
-                        else{snor.setText("hoofddeksel: ❌");}
+                            model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
+                            System.out.println(model.getGekozenPersoon1().getNaam());
+                            VBox mijnKaartje = view.getMijnKaartje();
+                            Text naamKaartje = (Text) mijnKaartje.getChildren().get(0);
+                            naamKaartje.setText(model.getGekozenPersoon1().getNaam());
+                            Text geslacht = (Text) mijnKaartje.getChildren().get(2);
+                            if (!model.getGekozenPersoon1().isVrouw()) {
+                                geslacht.setText("♂");
+                            } else {
+                                geslacht.setText("♀");
+                            }
+                            Text bril = (Text) mijnKaartje.getChildren().get(3);
+                            if (!model.getGekozenPersoon1().isBril()) {
+                                bril.setText("bril: \uD83D\uDDF8");
+                            } else {
+                                bril.setText("bril: ❌");
+                            }
+                            Text baard = (Text) mijnKaartje.getChildren().get(4);
+                            if (!model.getGekozenPersoon1().isBaard()) {
+                                baard.setText("baard: \uD83D\uDDF8");
+                            } else {
+                                baard.setText("baard:❌");
+                            }
+                            Text kaal = (Text) mijnKaartje.getChildren().get(5);
+                            if (!model.getGekozenPersoon1().isKaal()) {
+                                kaal.setText("kaal: \uD83D\uDDF8");
+                            } else {
+                                kaal.setText("kaal: ❌");
+                            }
+                            Text hoofddeksel = (Text) mijnKaartje.getChildren().get(6);
+                            if (!model.getGekozenPersoon1().isHoofddeksel()) {
+                                hoofddeksel.setText("hoofddeksel: \uD83D\uDDF8");
+                            } else {
+                                hoofddeksel.setText("hoofddeksel: ❌");
+                            }
+                            Text snor = (Text) mijnKaartje.getChildren().get(7);
+                            if (!model.getGekozenPersoon1().isSnor()) {
+                                snor.setText("snor: \uD83D\uDDF8");
+                            } else {
+                                snor.setText("hoofddeksel: ❌");
+                            }
 
 
+                            Text ogen = (Text) mijnKaartje.getChildren().get(8);
+                            if ("GRIJS".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur()))) {
+                                ogen.setText("oogkleur: Grijs");
+                            } else if ("BRUIN".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur()))) {
+                                ogen.setText("oogkleur: Bruin");
+                            } else if ("ZWART".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur()))) {
+                                ogen.setText("oogkleur:Zwart");
+                            }
+                            Text haren = (Text) mijnKaartje.getChildren().get(9);
+                            if ("ZWART".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur()))) {
+                                haren.setText("haarkleur: Zwart");
+                            }
+                            if ("BRUIN".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur()))) {
+                                haren.setText("haarkleur: Bruin");
+                            }
+                            if ("BLOND".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur()))) {
+                                haren.setText("haarkleur:blond");
+                            }
 
-                        Text ogen = (Text) mijnKaartje.getChildren().get(8);
-                        if ("GRIJS".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur())) ) {
+                            ImageView ImageKaartje = (ImageView) mijnKaartje.getChildren().get(1);
+
+
+                            ImageKaartje.setImage(new Image(model.getGekozenPersoon1().getNaam().toLowerCase() + ".png"));
+                            ImageKaartje.setVisible(true);
+//Hier ook de foto Aanpassen
+                        }
+                        //getter voor titel
+                        else if ((view.titel.getText().equals("ja") || view.titel.getText().equals("Nee") || view.getBevestigKnop().getText().equals("Klaar met bord") || view.getBevestigKnop().getText().equals("Ja")) && (view.titel.getText().charAt(view.titel.getText().length() - 1) != '?' && view.titel.getText().charAt(view.titel.getText().length() - 1) != '!' || view.getBevestigKnop().getText().equalsIgnoreCase("ja"))) {
+                            System.out.println(view.titel.getText().charAt(view.titel.getText().length() - 1));
+                            //String klasseKaartje= String.valueOf(event.getTarget().getClass());
+                            if (!view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")) {
+                                view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().add("uitgeschakeld");
+                                // System.out.println(  view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld"));
+                            } else {
+                                view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().remove("uitgeschakeld");
+                            }
+                            String erStaatErNogMaarEenRecht = model.draaiKaartjeOm(Integer.parseInt(id));
+                            //   String HuidigeTitel=   String.valueOf(view.titel.getText());
+                            if (!erStaatErNogMaarEenRecht.equals("meerDanEen")) {
+                                view.titel.setUserData(view.titel.getText());
+                                view.titel.setText("Denk je dat " + erStaatErNogMaarEenRecht + " de persoon is?");
+                                view.getBevestigKnop().setText("Ja");
+                            } else {
+                                if (view.titel.getUserData() != null) {
+                                    view.titel.setText((String) view.titel.getUserData());
+                                    view.titel.setUserData(null);
+                                }
+                                view.getBevestigKnop().setText("Klaar met bord");
+
+
+                            }
+                        }
+                    }
+                    else{
+
+                        VBox aangeduideView=view.getAangeduideKaartje();
+                      Persoon aangeduidModel=  model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id));
+                        Text naam= (Text)aangeduideView.getChildren().get(0);
+                        naam.setText(aangeduidModel.getNaam());
+                      Text geslacht=   (Text)aangeduideView.getChildren().get(2);
+                        if (!aangeduidModel.isVrouw()) {
+                            geslacht.setText("♂");
+                        } else {
+                            geslacht.setText("♀");
+                        }
+                        Text bril = (Text) aangeduideView.getChildren().get(3);
+                        if (!aangeduidModel.isBril()) {
+                            bril.setText("bril: \uD83D\uDDF8");
+                        } else {
+                            bril.setText("bril: ❌");
+                        }
+                        Text baard = (Text) aangeduideView.getChildren().get(4);
+                        if (!aangeduidModel.isBaard()) {
+                            baard.setText("baard: \uD83D\uDDF8");
+                        } else {
+                            baard.setText("baard:❌");
+                        }
+                        Text kaal = (Text) aangeduideView.getChildren().get(5);
+                        if (!aangeduidModel.isKaal()) {
+                            kaal.setText("kaal: \uD83D\uDDF8");
+                        } else {
+                            kaal.setText("kaal: ❌");
+                        }
+                        Text hoofddeksel = (Text) aangeduideView.getChildren().get(6);
+                        if (!aangeduidModel.isHoofddeksel()) {
+                            hoofddeksel.setText("hoofddeksel: \uD83D\uDDF8");
+                        } else {
+                            hoofddeksel.setText("hoofddeksel: ❌");
+                        }
+                        Text snor = (Text) aangeduideView.getChildren().get(7);
+                        if (!aangeduidModel.isSnor()) {
+                            snor.setText("snor: \uD83D\uDDF8");
+                        } else {
+                            snor.setText("hoofddeksel: ❌");
+                        }
+
+
+                        Text ogen = (Text) aangeduideView.getChildren().get(8);
+                        if ("GRIJS".equals(String.valueOf(aangeduidModel.getOogkleur()))) {
                             ogen.setText("oogkleur: Grijs");
-                        }
-                        else if ("BRUIN".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur())) ) {
+                        } else if ("BRUIN".equals(String.valueOf(aangeduidModel.getOogkleur()))) {
                             ogen.setText("oogkleur: Bruin");
-                        }
-                       else if ("ZWART".equals(String.valueOf(model.getGekozenPersoon1().getOogkleur())) ) {
+                        } else if ("ZWART".equals(String.valueOf(aangeduidModel.getOogkleur()))) {
                             ogen.setText("oogkleur:Zwart");
                         }
-                        Text haren = (Text) mijnKaartje.getChildren().get(9);
-                        if ("ZWART".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur())) ) {
+                        Text haren = (Text) aangeduideView.getChildren().get(9);
+                        if ("ZWART".equals(String.valueOf(aangeduidModel.getHaarkleur()))) {
                             haren.setText("haarkleur: Zwart");
                         }
-                        if ("BRUIN".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur())) ) {
+                        if ("BRUIN".equals(String.valueOf(aangeduidModel.getHaarkleur()))) {
                             haren.setText("haarkleur: Bruin");
                         }
-                        if ("BLOND".equals(String.valueOf(model.getGekozenPersoon1().getHaarkleur())) ) {
+                        if ("BLOND".equals(String.valueOf(aangeduidModel.getHaarkleur()))) {
                             haren.setText("haarkleur:blond");
                         }
 
-                        ImageView ImageKaartje = (ImageView) mijnKaartje.getChildren().get(1);
+                        ImageView ImageKaartje = (ImageView) aangeduideView.getChildren().get(1);
 
-                        ImageKaartje.setImage(new Image("MogelijkeFotos.PNG"));
+
+                        ImageKaartje.setImage(new Image(aangeduidModel.getNaam().toLowerCase() + ".png"));
                         ImageKaartje.setVisible(true);
-//Hier ook de foto Aanpassen
-                    }
-                    //getter voor titel
-                    else if ((view.titel.getText().equals("ja")||view.titel.getText().equals("Nee")||view.getBevestigKnop().getText().equals("Klaar met bord")||view.getBevestigKnop().getText().equals("Ja"))&&(view.titel.getText().charAt(view.titel.getText().length()-1)!='?'&&view.titel.getText().charAt(view.titel.getText().length()-1)!='!'|| view.getBevestigKnop().getText().equalsIgnoreCase("ja"))) {
-                        System.out.println(view.titel.getText().charAt(view.titel.getText().length()-1));
-                  //String klasseKaartje= String.valueOf(event.getTarget().getClass());
-                   if(! view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")){
-                       view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().add("uitgeschakeld");
-                  // System.out.println(  view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld"));
-                   } else {
-                       view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().remove("uitgeschakeld");
-                   }
-                  String erStaatErNogMaarEenRecht= model.draaiKaartjeOm(Integer.parseInt(id));
-                  //   String HuidigeTitel=   String.valueOf(view.titel.getText());
-                    if(!erStaatErNogMaarEenRecht.equals("meerDanEen")){
-                    view.titel.setUserData(view.titel.getText());
-                        view.titel.setText("Denk je dat "+erStaatErNogMaarEenRecht+" de persoon is?");
-                        view.getBevestigKnop().setText("Ja");
-                        }
-                    else{
-                        if(view.titel.getUserData()!=null) {
-                            view.titel.setText((String) view.titel.getUserData());
-                            view.titel.setUserData(null);
-                        }
-                        view.getBevestigKnop().setText("Klaar met bord");
+
 
 
                     }
-                    }
-                }
-            }
+
+                } }
+
+
+
 
         });
         Button bevestigbutton=view.getBevestigKnop();
@@ -198,13 +300,13 @@ public class eerstePresenteer {
                                 Button negatief= (Button) view.getKnoppenPosEnNeg().getChildren().get(1);
 
                                 if( parseBoolean(vraagComputer[1])) {
-                                     positief.setUserData(true);
-                                    negatief.setUserData(false);
+                                     positief.setUserData(false);
+                                    negatief.setUserData(true);
 
                                 }
                                  else {
-                                     negatief.setUserData(true);
-                                    positief.setUserData(false);
+                                     negatief.setUserData(false);
+                                    positief.setUserData(true);
 
                                 }
 
@@ -219,7 +321,15 @@ public class eerstePresenteer {
 
 
 
-            }});
+            }
+
+
+
+
+
+
+
+        });
 
         GridPane vragen = view.getVragen();
 
@@ -268,10 +378,61 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                view.titel.setText("Welke vraag zou je willen stellen?");
            }
        }
-   });
+   }
 
 
-    };
+   );
+
+
+view.getMenu().getMenus().forEach(e->e.setOnAction(b->
+{
+    final MenuItem geklikteMenuItem = (MenuItem) b.getTarget();
+    System.out.println(geklikteMenuItem.getUserData());
+    Stage stage = (Stage) view.getScene().getWindow();
+    File file;
+    InputStream resource = null;
+    if (geklikteMenuItem.getUserData() == "hulp") {
+
+
+        resource = getClass().getClassLoader().getResourceAsStream("hulp.txt");
+
+
+    }
+    try (InputStreamReader streamReader =
+                 new InputStreamReader(resource, StandardCharsets.UTF_8);
+         BufferedReader reader = new BufferedReader(streamReader)) {
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+    } catch (IOException er) {
+        er.printStackTrace();
+    }
+
+}));}
+
+
+
+
+
+
+
+
+  /*    Niet verwijderen
+  Scene newScene=new Scene(new Button("X"));
+stage.setScene(newScene);
+*/
+
+ ;
+
+
+
+
+
+     //   menu.getMenus().get(0).getItems().(e->System.out.println("ok"));
+
 
 
        /*
@@ -300,12 +461,14 @@ view.getTekstveldje().setText("Er is gedrukt");
      String tekst=model.getSpelbord1().getAllePersonen().get(i).getNaam();
      VBox X =(VBox)(view.getBord().getChildren().get(i));
      Text bordnaam=(Text)X.getChildren().get(0);
-
      bordnaam.setText(tekst);
+     ImageView fotoBord= (ImageView)X.getChildren().get(1);
+     System.out.println(tekst.toLowerCase()+".png");
+     fotoBord.setImage(new Image(tekst.toLowerCase()+".png"));
 
 //Onderstaande code werkt even goed zou he voorzien op ongekend aantal vakjes
      /*Text naam=new Text(tekst);
-     naam.setId(String.valueOf(i));
+     naam.setId(String.valueOf(i));s
      ImageView fotoPersoon=new ImageView("Cheeseburger.jpg");
     fotoPersoon.setId(String.valueOf(i));
      fotoPersoon.setFitHeight(150);
