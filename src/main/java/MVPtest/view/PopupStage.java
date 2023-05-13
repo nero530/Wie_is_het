@@ -4,8 +4,10 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -13,10 +15,40 @@ import javafx.stage.Stage;
 
 public class PopupStage extends Stage {
 
-BorderPane rootNode = new BorderPane();
-Text titel;
+private BorderPane rootNode = new BorderPane();
+private Text titel;
 
-ImageView afbeelding;
+private ImageView afbeelding;
+
+    public HBox getOpnieuwOfStoppen() {
+        return opnieuwOfStoppen;
+    }
+
+    public void setOpnieuwOfStoppen(HBox opnieuwOfStoppen) {
+        this.opnieuwOfStoppen = opnieuwOfStoppen;
+    }
+
+    private HBox opnieuwOfStoppen;
+
+    public Button getOpnieuw() {
+        return opnieuw;
+    }
+
+    public void setOpnieuw(Button opnieuw) {
+        this.opnieuw = opnieuw;
+    }
+
+    private Button opnieuw;
+
+    public Button getStoppen() {
+        return stoppen;
+    }
+
+    public void setStoppen(Button stoppen) {
+        this.stoppen = stoppen;
+    }
+
+    private Button stoppen;
 
     public Scene getPopupScene() {
         return popupScene;
@@ -52,7 +84,7 @@ ImageView afbeelding;
         this.content = content;
     }
 
-    Text content;
+    private Text content;
 
 
     public PopupStage() {
@@ -74,7 +106,10 @@ ImageView afbeelding;
     rootNode = new BorderPane();
     titel=new Text();
     afbeelding=new ImageView();
-
+    //afbeeldingen
+    opnieuw=new Button("nog een spelletje?")  ;
+    stoppen=new Button("programma afsluiten");
+    opnieuwOfStoppen=new HBox();
 
 
 
@@ -82,12 +117,13 @@ ImageView afbeelding;
 void layoutNodes(){
 
     rootNode.setTop(titel);
-
+    opnieuwOfStoppen.getChildren().addAll(opnieuw,stoppen);
+    rootNode.setBottom(opnieuwOfStoppen);
     rootNode.setCenter(afbeelding);
     rootNode.setAlignment(afbeelding,Pos.CENTER);
     rootNode.setPadding(new Insets(10,10,10,10));
 
-    popupScene=new Scene(rootNode);
+    popupScene=new Scene(rootNode,400,400);
 
 
 

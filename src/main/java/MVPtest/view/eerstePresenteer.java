@@ -274,6 +274,9 @@ public class eerstePresenteer {
             public void handle(ActionEvent event) {
                 //Maak getter voor titel
               //  System.out.println("JA");
+
+
+
                 if(view.titel.getText().equals("Kies een kaart")&&!model.getGekozenPersoon1().getNaam().equals("anoniem")){
 
                     view.titel.setText("Welke vraag zou je willen stellen?");
@@ -294,29 +297,30 @@ public class eerstePresenteer {
 
                     }
                 }
-                else if( view.getBevestigKnop().getText().equals("Ja")){
-                    String verdachte = String.valueOf(view.titel);
-                            verdachte=verdachte.replace("Denk je dat ","");
-                   verdachte= verdachte.replace(" de persoon is?","");
-                // view.getPopupStage().show();
-                PopupStage eindstage=new PopupStage()  ;
-                   eindstage.initModality(Modality.APPLICATION_MODAL);
-                   eindstage.initStyle(StageStyle.DECORATED);
-                    if(model.getGekozenPersoon2().getNaam().equalsIgnoreCase(verdachte)) {
-                        eindstage.getTitel().setText("Proficiat je hebt gewonnen");
-                        eindstage.setTitle("proficiat");
+                else if(view.getBevestigKnop().getText().equals("Ja")||view.titel.getText().contains("computer")) {
 
-                    }
-                    else{
-                        eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
-                            eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase()+".png"));
-                        eindstage.setTitle("Oei je hebt verloren");
-                    }
+                        String verdachte = String.valueOf(view.titel);
+                        verdachte = verdachte.replace("Denk je dat ", "");
+                        verdachte = verdachte.replace(" de persoon is?", "");
+                        // view.getPopupStage().show();
+                        PopupStage eindstage = new PopupStage();
+                        eindstage.initModality(Modality.APPLICATION_MODAL);
+                        eindstage.initStyle(StageStyle.DECORATED);
+                        if (model.getGekozenPersoon2().getNaam().equalsIgnoreCase(verdachte)&&!view.titel.getText().contains("computer")) {
+
+                            eindstage.getTitel().setText("Proficiat je hebt gewonnen");
+                            eindstage.setTitle("proficiat");
+
+                        } else {
+                            eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
+                            eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase() + ".png"));
+                            eindstage.setTitle("Oei je hebt verloren");
+                        }
 
 
 
 
-                   eindstage.show();
+                   eindstage.showAndWait();
                     System.out.println( model.getGekozenPersoon2().getNaam());
                   //  view.titel.setText("Denk je dat " + erStaatErNogMaarEenRecht + " de persoon is?");
 
@@ -329,6 +333,15 @@ public class eerstePresenteer {
                                 String[] vraagComputer=model.computerSteltVraag();
 
                                 view.titel.setText(vraagComputer[0]);
+                               if(vraagComputer[0].contains("computer")) {
+                                   PopupStage eindstage = new PopupStage();
+                                eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
+                                eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase() + ".png"));
+                                eindstage.setTitle("Oei je hebt verloren");
+                                eindstage.showAndWait();
+                            }
+
+
                                 bevestigbutton.setText("Bevestigen");
 
                                 bevestigbutton.setVisible(false);

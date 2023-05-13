@@ -1,5 +1,8 @@
 package MVPtest;
 
+//buttons ovalen
+//
+
 import MVPtest.model.Spel;
 import MVPtest.view.Geheel;
 import MVPtest.view.eerstePresenteer;
