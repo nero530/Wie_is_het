@@ -3,6 +3,7 @@ import MVPtest.HelloApplication;
 
 import MVPtest.model.Persoon;
 import MVPtest.model.Spel;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import org.w3c.dom.NodeList;
 import javafx.event.ActionEvent;
 
@@ -344,7 +346,7 @@ public class eerstePresenteer {
 
                                 }
 
-
+System.out.println(view.getKnoppenPosEnNeg());
                                 view.getKnoppenPosEnNeg().setVisible(true);
 
                             } catch (IllegalAccessException e) {
@@ -428,6 +430,16 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                                                view.getVragen().setVisible(true);
                                                view.getKnoppenPosEnNeg().setVisible(false);
                                                 view.titel.setText("Welke vraag zou je willen stellen?");
+                                           }
+                                           else{
+
+                                               view.getKnoppenPosEnNeg().getChildren().get(2).setVisible(true);
+
+                                               PauseTransition delay = new PauseTransition(Duration.seconds(3));
+                                               delay.setOnFinished(e-> {
+                                                   view.getKnoppenPosEnNeg().getChildren().get(2).setVisible(false);; });
+                                               delay.play();
+
                                            }
 
                                          }

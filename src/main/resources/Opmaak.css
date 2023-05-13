@@ -9,12 +9,7 @@
 
 }
 
-button{
 
--fx-fill:red;
-
-
-}
 
 .titel{
 -fx-font-size:22px;
@@ -34,4 +29,12 @@ button{
 .button{
 -fx-focus-insets: "5px";
 -fx-focus-color: "purple";
+}
+
+.posEnNeg{
+-fx-margin:50;
+-fx-border-radius:50%;
+
+
+
 }

@@ -43,7 +43,8 @@ public class Menu2 extends MenuBar{
         }
 
         private void layoutNodes(){
-
+this.setMaxWidth(100);
+this.getStyleClass().add("uitgeschakeld");
       this.getMenus().add(mijnMenu);
         }
 

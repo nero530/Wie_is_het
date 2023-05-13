@@ -60,8 +60,8 @@ private HBox oogKleuren;
  vraagEen.setUserData("vrouw");
 
 this.setMaxHeight(500);
-
-
+       oogKleuren.setSpacing(7);
+       haarKleuren.setSpacing(7);
 this.setStyle("-fx-background-color: green");
 this.setMouseTransparent(false);
 
@@ -77,7 +77,7 @@ this.add(vraagZeven,0,6);
 this.add(vraagAcht,0,8);
 this.add(haarKleuren,0,9);
  this.add(oogKleuren,0,7);
-this.setVgap(5);
+this.setVgap(7);
 
 
    }

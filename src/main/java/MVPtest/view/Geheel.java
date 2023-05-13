@@ -32,7 +32,7 @@ public class Geheel extends GridPane {
     final Label label6 = new Label("");
     final Label label7 = new Label("");
 
-    private HBox knoppenPosEnNeg;
+    private GridPane knoppenPosEnNeg;
 
   private  GridPane verzamelElement=new VerzamelElement();
     private MenuBar menu;
@@ -99,9 +99,10 @@ this.hulp= new VBox();
         this.label7.setMinHeight(400);
         titel.setText("Kies een kaart");
         titel.getStyleClass().add("titel");
+        titel.setMinWidth(350);
         setHalignment(titel,HPos.CENTER);
         setValignment(titel, VPos.CENTER);
-setMargin(titel,new Insets(20,0,0,0));
+        setMargin(titel,new Insets(20,0,0,10));
         // setPercentWidth
         this.add(label1,0,0);
         this.add(label2,1,0);
@@ -113,7 +114,7 @@ setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
         this.add(label5,1,1);
         this.add(label6,1,2);
         knoppenPosEnNeg.setVisible(false);
-        setMargin(knoppenPosEnNeg,new Insets(250,0,0,0));
+       // setMargin(knoppenPosEnNeg,new Insets(250,0,0,0));
         this.add(knoppenPosEnNeg,2,2);
 
 
@@ -125,14 +126,18 @@ setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
 
         this.add(menu,4,0);
         setHalignment(menu,HPos.RIGHT);
-        setValignment(menu,VPos.BOTTOM);
+        menu.setMinWidth(35);
+      //  setValignment(menu,VPos.BOTTOM);
 
         this.add(bord,1,1,1,3);
         this.add(mijnKaartje,3,1);
+        aangeduideKaartje.setAlignment(Pos.CENTER);
         this.add(aangeduideKaartje,3,2);
         // @BUG
         this.vragen.setVisible(false);
         setValignment(vragen,VPos.TOP);
+        setMargin(vragen,new Insets(30,0,0,50));
+        setHalignment(vragen,HPos.CENTER);
         this.add(vragen,2,1,1,2);
 
     }
@@ -162,7 +167,7 @@ setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
 
     }
 
-  public  HBox getKnoppenPosEnNeg(){
+  public  GridPane getKnoppenPosEnNeg(){
 
         return knoppenPosEnNeg;
 
