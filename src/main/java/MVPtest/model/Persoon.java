@@ -95,6 +95,19 @@ this.oogkleur=oogkleur;
 
  }
 
+ public Persoon(){
+  this.naam="anoniem";
+  vrouw=false;
+  this.bril=false;
+  this.kaal=false;
+  this.hoofddeksel=false;
+  this.snor=false;
+  this.baard=false;
+  this.haarkleur=Haar.BLOND;
+  this.oogkleur=Ogen.ZWART;
+
+ }
+
  enum Haar {
   ZWART,
   BRUIN,

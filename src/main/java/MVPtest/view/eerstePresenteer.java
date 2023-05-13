@@ -36,10 +36,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Stream;
 
 
 import static java.lang.Boolean.parseBoolean;
@@ -90,7 +88,7 @@ public class eerstePresenteer {
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
                         System.out.println(event.getClickCount());
                         if (view.titel.getText().equals("Kies een kaart")) {
-
+                            view.getMijnKaartje().setVisible(true);
                             model.setGekozenPersoon1(model.getSpelbord1().getAllePersonen().get(Integer.parseInt(id)));
                             System.out.println(model.getGekozenPersoon1().getNaam());
                             VBox mijnKaartje = view.getMijnKaartje();
@@ -533,6 +531,41 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
 
 
     }
+    else if((geklikteMenuItem.getUserData().equals("nieuwSpel") )){
+
+        view.getBord().getChildren().forEach((i)->{
+            if(i.getStyleClass().toString().equals("uitgeschakeld")){
+
+                i.getStyleClass().remove("uitgeschakeld");
+            }
+
+model.setGekozenPersoon2(model.getSpelbord1().getAllePersonen().get((int) (Math.random() * 19)));
+model.setGekozenPersoon1(new Persoon());
+
+                Arrays.fill(model.getSpelbord1().getMogelijk(), false);
+                Arrays.fill(model.getSpelbord2().getMogelijk(), false);
+            view.getVragen().setVisible(false);
+view.titel.setText("Kies een kaart");
+view.getMijnKaartje().setVisible(false);
+                this.view.getKnoppenPosEnNeg().setVisible(false);
+                this.view.getBevestigKnop().setVisible(true);
+                Window.getWindows().forEach(System.out::println);
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+
+
+    }
 
 
 
@@ -592,7 +625,7 @@ view.getTekstveldje().setText("Er is gedrukt");
      ImageView fotoBord= (ImageView)X.getChildren().get(1);
      System.out.println(tekst.toLowerCase()+".png");
      fotoBord.setImage(new Image(tekst.toLowerCase()+".png"));
-
+    // view.getMijnKaartje().setVisible(false);
 //Onderstaande code werkt even goed zou he voorzien op ongekend aantal vakjes
      /*Text naam=new Text(tekst);
      naam.setId(String.valueOf(i));s
@@ -610,13 +643,16 @@ view.getTekstveldje().setText("Er is gedrukt");
 
 
 
-   if (model.getGekozenPersoon1().getNaam() == "anoniem") {
+   /*if (model.getGekozenPersoon1().getNaam().equals("anoniem") ) {
        VBox mijnKaartje=view.getMijnKaartje();
 
     Text tekst=(Text) mijnKaartje.getChildren().get(0);
 tekst.setText("Kies Een kaartje");
 
-        }
+
+        }*/
+
+
 
 
 

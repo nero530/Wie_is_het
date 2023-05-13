@@ -63,7 +63,7 @@ private Text eenTekst2;
         fotoPersoon.setVisible(false);
 setSpacing(2);
         // naam.setStyle("-fx-text-fill: inputMijnKaartje");
-
+this.setVisible(false);
 
 this.setStyle("-fx-background-color: blue");
 

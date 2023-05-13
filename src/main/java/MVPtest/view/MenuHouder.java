@@ -12,7 +12,7 @@ public class MenuHouder extends HBox {
     Button auteurs = new Button("auteurs");
 
     Button hulp = new Button("Hulp");
-    Button nieuwSpel = new Button("nieuw spel");
+    Button nieuwSpel = new Button("Nieuw spel");
     Button bewaren = new Button("bewaren");
 
 

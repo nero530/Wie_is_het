@@ -11,6 +11,7 @@ import static java.lang.Math.random;
 public class Spel {
 
 
+
     //spelbord + een kaartje (van het type persoon)
 private Persoon gekozenPersoon1;
 private Persoon gekozenPersoon2;
