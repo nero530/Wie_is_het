@@ -14,7 +14,16 @@ public class Menu2 extends MenuBar{
         MenuItem auteurs = new MenuItem("auteurs");
 
         MenuItem hulp = new MenuItem("Hulp");
-        MenuItem nieuwSpel = new MenuItem("nieuw spel");
+
+    public MenuItem getNieuwSpel() {
+        return nieuwSpel;
+    }
+
+    public void setNieuwSpel(MenuItem nieuwSpel) {
+        this.nieuwSpel = nieuwSpel;
+    }
+
+    MenuItem nieuwSpel = new MenuItem("nieuw spel");
         MenuItem bewaren = new MenuItem("bewaren");
 
         Menu mijnMenu ;

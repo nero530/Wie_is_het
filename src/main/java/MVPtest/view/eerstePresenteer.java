@@ -7,6 +7,7 @@ import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -255,7 +256,7 @@ public class eerstePresenteer {
 
                         ImageKaartje.setImage(new Image(aangeduidModel.getNaam().toLowerCase() + ".png"));
                         ImageKaartje.setVisible(true);
-
+                        view.getAangeduideKaartje().setVisible(true);;
 
 
                     }
@@ -302,9 +303,20 @@ public class eerstePresenteer {
                         verdachte = verdachte.replace(" de persoon is?", "");
                         // view.getPopupStage().show();
                         PopupStage eindstage = new PopupStage();
+                        eindstage.getOpnieuw().setOnAction(e->{
+
+                          Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(2),new ActionEvent());
+                            eindstage.close();
+
+
+System.out.println(view.getMenu().getMenus().get(0).getItems().get(2).getText());
+
+                } )  ;;
                         eindstage.initModality(Modality.APPLICATION_MODAL);
                         eindstage.initStyle(StageStyle.DECORATED);
-                        if (model.getGekozenPersoon2().getNaam().equalsIgnoreCase(verdachte)&&!view.titel.getText().contains("computer")) {
+                        System.out.println(model.getGekozenPersoon2().getNaam());
+                    System.out.println(verdachte);
+                        if (model.getGekozenPersoon2().getNaam().trim().equalsIgnoreCase(verdachte.trim())&&!view.titel.getText().contains("computer")) {
 
                             eindstage.getTitel().setText("Proficiat je hebt gewonnen");
                             eindstage.setTitle("proficiat");
@@ -333,6 +345,14 @@ public class eerstePresenteer {
                                 view.titel.setText(vraagComputer[0]);
                                if(vraagComputer[0].contains("computer")) {
                                    PopupStage eindstage = new PopupStage();
+                                   eindstage.getOpnieuw().setOnAction(j->
+             {                           Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(2),new ActionEvent());  ;
+
+
+
+                 System.out.println(view.getMenu().getMenus().get(0).getItems().get(2).getText());
+
+                                       } );
                                 eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
                                 eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase() + ".png"));
                                 eindstage.setTitle("Oei je hebt verloren");
@@ -473,6 +493,7 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
    );
 
 
+
 view.getMenu().getMenus().forEach(e->e.setOnAction(b->
 {
     final MenuItem geklikteMenuItem = (MenuItem) b.getTarget();
@@ -544,35 +565,21 @@ model.setGekozenPersoon1(new Persoon());
 
                 Arrays.fill(model.getSpelbord1().getMogelijk(), false);
                 Arrays.fill(model.getSpelbord2().getMogelijk(), false);
-            view.getVragen().setVisible(false);
-view.titel.setText("Kies een kaart");
-view.getMijnKaartje().setVisible(false);
+                view.getVragen().setVisible(false);
+                view.titel.setText("Kies een kaart");
+                view.getMijnKaartje().setVisible(false);
                 this.view.getKnoppenPosEnNeg().setVisible(false);
                 this.view.getBevestigKnop().setVisible(true);
-                Window.getWindows().forEach(System.out::println);
+            view.getAangeduideKaartje().setVisible(false);;
 
-
-
-
-
-
-
-
-
-
+        ;
 
 
         });
 
 
+    }}));
     }
-
-
-
-
-
-}));}
-
 
 
 
