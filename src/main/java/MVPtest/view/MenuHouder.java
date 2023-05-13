@@ -11,7 +11,7 @@ public class MenuHouder extends HBox {
 
     Button auteurs = new Button("auteurs");
 
-    Button hulp = new Button("hulp");
+    Button hulp = new Button("Hulp");
     Button nieuwSpel = new Button("nieuw spel");
     Button bewaren = new Button("bewaren");
 
@@ -28,10 +28,10 @@ this.layoutNodes();
     private void  initialiseNodes(){
 
         auteurs.setUserData("auteurs");
-        hulp.setUserData("hulp");
+        hulp.setUserData("Hulp");
         nieuwSpel.setUserData("nieuwSpel");
         bewaren.setUserData(bewaren);
-       // toggleGroup.getToggles().addAll(auteurs,hulp,nieuwSpel,bewaren);
+       // toggleGroup.getToggles().addAll(auteurs,Hulp,nieuwSpel,bewaren);
 
 
 

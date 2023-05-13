@@ -3,6 +3,7 @@ import MVPtest.HelloApplication;
 
 import MVPtest.model.Persoon;
 import MVPtest.model.Spel;
+import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +19,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import org.w3c.dom.NodeList;
 import javafx.event.ActionEvent;
@@ -334,10 +337,13 @@ public class eerstePresenteer {
         GridPane vragen = view.getVragen();
 
         for(Node child:   vragen.getChildren()){
+            System.out.println(child);
             if(child instanceof Button){
 child.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
                             @Override
                             public void handle(MouseEvent event) {
+
                                 //System.out.println(event.getSource().toString().split("'")[1]);
                             view.getBevestigKnop().setUserData(event.getSource().toString().split("'")[1]);
                                // System.out.println(bevestigbutton.getUserData());
@@ -346,7 +352,35 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 
         });
-            }}
+
+
+
+            }else if(child instanceof HBox){
+                ((HBox) child).getChildren().forEach(ch->ch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                    @Override
+                    public void handle(MouseEvent event) {
+
+                        //System.out.println(event.getSource().toString().split("'")[1]);
+                        view.getBevestigKnop().setUserData(event.getSource().toString().split("'")[1]);
+                        // System.out.println(bevestigbutton.getUserData());
+                    }
+
+
+
+                }));
+
+
+
+
+
+            }
+
+
+
+
+
+        }
 
          Button pos= (Button) view.getKnoppenPosEnNeg().getChildren().get(0);
         Button neg= (Button) view.getKnoppenPosEnNeg().getChildren().get(1);
@@ -391,7 +425,7 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
     Stage stage = (Stage) view.getScene().getWindow();
     File file;
     InputStream resource = null;
-    if (geklikteMenuItem.getUserData() == "hulp") {
+    if (geklikteMenuItem.getUserData() == "Hulp") {
 
 
         resource = getClass().getClassLoader().getResourceAsStream("hulp.txt");
@@ -405,8 +439,18 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
         String line;
         while ((line = reader.readLine()) != null) {
             System.out.println(line);
-        }
+            view.getHulp().getChildren().add(new Text(line));
 
+
+
+
+        }
+        HelloApplication.getSplash().getScene().setRoot(view.getHulp());
+        HelloApplication.getSplash().initModality(Modality.WINDOW_MODAL);
+        HelloApplication.getSplash().initStyle(StageStyle.DECORATED);
+
+        HelloApplication.getSplash().show();
+        ;
     } catch (IOException er) {
         er.printStackTrace();
     }

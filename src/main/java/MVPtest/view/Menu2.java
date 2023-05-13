@@ -13,7 +13,7 @@ public class Menu2 extends MenuBar{
 
         MenuItem auteurs = new MenuItem("auteurs");
 
-        MenuItem hulp = new MenuItem("hulp");
+        MenuItem hulp = new MenuItem("Hulp");
         MenuItem nieuwSpel = new MenuItem("nieuw spel");
         MenuItem bewaren = new MenuItem("bewaren");
 
@@ -30,10 +30,10 @@ public class Menu2 extends MenuBar{
         private void  initialiseNodes(){
 
             auteurs.setUserData("auteurs");
-            hulp.setUserData("hulp");
+            hulp.setUserData("Hulp");
             nieuwSpel.setUserData("nieuwSpel");
             bewaren.setUserData(bewaren);
-            // toggleGroup.getToggles().addAll(auteurs,hulp,nieuwSpel,bewaren);
+            // toggleGroup.getToggles().addAll(auteurs,Hulp,nieuwSpel,bewaren);
             mijnMenu=new Menu("Menu");
             mijnMenu.getItems().addAll(auteurs,hulp,nieuwSpel,bewaren);
 

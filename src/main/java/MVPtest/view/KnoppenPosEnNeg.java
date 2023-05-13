@@ -15,6 +15,7 @@ public class KnoppenPosEnNeg extends HBox {
     void initialiseNodes(){
        positief=new Button("Ja");
        negatief=new Button("Nee");
+this.setStyle("-fx-background-color: red");
 
     }
     void layoutNodes(){

@@ -5,7 +5,6 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
@@ -14,7 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Popup;
+import javafx.scene.text.TextFlow;
 
 public class Geheel extends GridPane {
     public void setBord(TilePane bord) {
@@ -38,6 +37,8 @@ public class Geheel extends GridPane {
   private  GridPane verzamelElement=new VerzamelElement();
     private MenuBar menu;
 
+private TextFlow hulp;
+
 
     public Geheel() {
         this.initialiseNodes();
@@ -56,6 +57,8 @@ public class Geheel extends GridPane {
         this.aangeduideKaartje = aangeduideKaartje;
     }
 
+
+
     private void initialiseNodes() {
         this.bord = new Bord();
         this.mijnKaartje = new MijnKaartje();
@@ -64,7 +67,7 @@ public class Geheel extends GridPane {
         this.bevestigKnop=new Button("bevestig Keuze");
     this.knoppenPosEnNeg=new KnoppenPosEnNeg();
         this.menu= new Menu2();
-
+this.hulp=new TextFlow();
 
     }
 
@@ -93,12 +96,15 @@ setMargin(titel,new Insets(20,0,0,0));
         this.add(label1,0,0);
         this.add(label2,1,0);
 setHalignment(bevestigKnop,HPos.CENTER);
-        this.add(bevestigKnop,2,3);
+setValignment(bevestigKnop,VPos.TOP);
+this.setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
+        this.add(bevestigKnop,2,2);
         this.add(titel,2,0);
         this.add(label5,1,1);
         this.add(label6,1,2);
         knoppenPosEnNeg.setVisible(false);
-        this.add(knoppenPosEnNeg,2,3);
+        this.setMargin(knoppenPosEnNeg,new Insets(250,0,0,0));
+        this.add(knoppenPosEnNeg,2,2);
 
 
 
@@ -116,6 +122,7 @@ setHalignment(bevestigKnop,HPos.CENTER);
         this.add(aangeduideKaartje,3,2);
         // @BUG
         this.vragen.setVisible(false);
+        this.setValignment(vragen,VPos.TOP);
         this.add(vragen,2,1,1,2);
 
     }
@@ -158,4 +165,12 @@ setHalignment(bevestigKnop,HPos.CENTER);
     public void setVerzamelElement(GridPane verzamelElement) {
         this.verzamelElement = verzamelElement;
     }
+    public TextFlow getHulp() {
+        return hulp;
+    }
+
+    public void setHulp(TextFlow hulp) {
+        this.hulp = hulp;
+    }
+
 }

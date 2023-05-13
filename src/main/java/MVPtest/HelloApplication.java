@@ -2,37 +2,35 @@ package MVPtest;
 
 import MVPtest.model.Spel;
 import MVPtest.view.Geheel;
-import MVPtest.view.Overlay;
 import MVPtest.view.eerstePresenteer;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 
 public class HelloApplication extends Application {
 
 
-    Stage splash = new Stage();
+    public static Stage getSplash() {
+        return splash;
+    }
+
+    public static void setSplash(Stage splash) {
+        HelloApplication.splash = splash;
+    }
+
+    private static Stage  splash;
 
     @Override
     public void start(Stage stage) throws IOException {
-
+splash=new Stage();
         Geheel view=new Geheel();
 
 

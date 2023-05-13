@@ -1,5 +1,6 @@
 package MVPtest.view;
 
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -45,7 +46,9 @@ private HBox oogKleuren;
         oogkleurGrijs=new Button("Grijs");
         vraagAcht=new Label("Is de haarkleur...?");
         haarKleurBlond=new Button("blond");
+
         haarKleurZwart=new Button("zwart");
+        haarKleurZwart.setStyle("-fx-background-color: yellow");
         haarKleurBruin=new Button("bruin");
         oogKleuren=new HBox(oogkleurBlauw,oogkleurBruin,oogkleurGrijs);
         haarKleuren=new HBox(haarKleurBlond,haarKleurZwart,haarKleurBruin);
@@ -56,9 +59,11 @@ private HBox oogKleuren;
    void layoutNodes() {
  vraagEen.setUserData("vrouw");
 
+this.setMaxHeight(500);
 
 
-
+this.setStyle("-fx-background-color: green");
+this.setMouseTransparent(false);
 
 this.add(vraagEen,0,0);
 this.add(vraagTwee,0,1);
@@ -67,6 +72,7 @@ this.add(vraagVier,0,3);
 this.add(vraagVijf,0,4);
 this.add(vraagZes,0,5);
 this.add(vraagZeven,0,6);
+
 
 this.add(vraagAcht,0,8);
 this.add(haarKleuren,0,9);
