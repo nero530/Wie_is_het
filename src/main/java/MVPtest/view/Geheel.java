@@ -37,7 +37,9 @@ public class Geheel extends GridPane {
   private  GridPane verzamelElement=new VerzamelElement();
     private MenuBar menu;
 
-private TextFlow hulp;
+    private PopupStage popupStage;
+
+private VBox hulp;
 
 
     public Geheel() {
@@ -67,7 +69,7 @@ private TextFlow hulp;
         this.bevestigKnop=new Button("bevestig Keuze");
     this.knoppenPosEnNeg=new KnoppenPosEnNeg();
         this.menu= new Menu2();
-this.hulp=new TextFlow();
+this.hulp= new VBox();
 
     }
 
@@ -77,6 +79,14 @@ this.hulp=new TextFlow();
 
     public void setMenu(MenuBar menu) {
         this.menu = menu;
+    }
+
+    public PopupStage getPopupStage() {
+        return popupStage;
+    }
+
+    public void setPopupStage(PopupStage popupStage) {
+        this.popupStage = popupStage;
     }
 
     private void layoutNodes() {
@@ -97,23 +107,23 @@ setMargin(titel,new Insets(20,0,0,0));
         this.add(label2,1,0);
 setHalignment(bevestigKnop,HPos.CENTER);
 setValignment(bevestigKnop,VPos.TOP);
-this.setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
+setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
         this.add(bevestigKnop,2,2);
         this.add(titel,2,0);
         this.add(label5,1,1);
         this.add(label6,1,2);
         knoppenPosEnNeg.setVisible(false);
-        this.setMargin(knoppenPosEnNeg,new Insets(250,0,0,0));
+        setMargin(knoppenPosEnNeg,new Insets(250,0,0,0));
         this.add(knoppenPosEnNeg,2,2);
 
 
-
+        popupStage=new PopupStage();
 
         mijnKaartje.setMouseTransparent(true);
 
 
 
-        this.add(menu,3,4);
+        this.add(menu,4,0);
         setHalignment(menu,HPos.RIGHT);
         setValignment(menu,VPos.BOTTOM);
 
@@ -122,7 +132,7 @@ this.setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
         this.add(aangeduideKaartje,3,2);
         // @BUG
         this.vragen.setVisible(false);
-        this.setValignment(vragen,VPos.TOP);
+        setValignment(vragen,VPos.TOP);
         this.add(vragen,2,1,1,2);
 
     }
@@ -165,11 +175,11 @@ this.setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
     public void setVerzamelElement(GridPane verzamelElement) {
         this.verzamelElement = verzamelElement;
     }
-    public TextFlow getHulp() {
+    public VBox getHulp() {
         return hulp;
     }
 
-    public void setHulp(TextFlow hulp) {
+    public void setHulp(VBox hulp) {
         this.hulp = hulp;
     }
 

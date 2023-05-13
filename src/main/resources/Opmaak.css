@@ -25,3 +25,13 @@ button{
 -fx-background-color:"red"
 
 }
+
+.menuTitel{
+
+-fx-font-weight:bold;
+}
+
+.button{
+-fx-focus-insets: "5px";
+-fx-focus-color: "purple";
+}

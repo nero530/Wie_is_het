@@ -30,7 +30,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-splash=new Stage();
+        splash=new Stage();
         Geheel view=new Geheel();
 
 
@@ -42,7 +42,7 @@ splash=new Stage();
 
         scene.getStylesheets().add("Opmaak.css");
         stage.setTitle("Hello!");
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
         stage.setResizable(true);
 
         stage.setScene(scene);

@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -173,6 +174,8 @@ public class eerstePresenteer {
                                 view.titel.setUserData(view.titel.getText());
                                 view.titel.setText("Denk je dat " + erStaatErNogMaarEenRecht + " de persoon is?");
                                 view.getBevestigKnop().setText("Ja");
+
+
                             } else {
                                 if (view.titel.getUserData() != null) {
                                     view.titel.setText((String) view.titel.getUserData());
@@ -289,6 +292,34 @@ public class eerstePresenteer {
 
                     }
                 }
+                else if( view.getBevestigKnop().getText().equals("Ja")){
+                    String verdachte = String.valueOf(view.titel);
+                            verdachte=verdachte.replace("Denk je dat ","");
+                   verdachte= verdachte.replace(" de persoon is?","");
+                // view.getPopupStage().show();
+                PopupStage eindstage=new PopupStage()  ;
+                   eindstage.initModality(Modality.APPLICATION_MODAL);
+                   eindstage.initStyle(StageStyle.DECORATED);
+                    if(model.getGekozenPersoon2().getNaam().equalsIgnoreCase(verdachte)) {
+                        eindstage.getTitel().setText("Proficiat je hebt gewonnen");
+                        eindstage.setTitle("proficiat");
+
+                    }
+                    else{
+                        eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
+                            eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase()+".png"));
+                        eindstage.setTitle("Oei je hebt verloren");
+                    }
+
+
+
+
+                   eindstage.show();
+                    System.out.println( model.getGekozenPersoon2().getNaam());
+                  //  view.titel.setText("Denk je dat " + erStaatErNogMaarEenRecht + " de persoon is?");
+
+
+                }
                   else if(view.getBevestigKnop().getText().equals("Klaar met bord")){
 
 
@@ -312,6 +343,7 @@ public class eerstePresenteer {
                                     positief.setUserData(true);
 
                                 }
+
 
                                 view.getKnoppenPosEnNeg().setVisible(true);
 
@@ -425,35 +457,61 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
     Stage stage = (Stage) view.getScene().getWindow();
     File file;
     InputStream resource = null;
+    String titel=geklikteMenuItem.getUserData().toString();
+    Stage menuStage=new Stage(StageStyle.DECORATED);
+    menuStage.initModality(Modality.WINDOW_MODAL);
+    menuStage.initStyle(StageStyle.DECORATED);
+
     if (geklikteMenuItem.getUserData() == "Hulp") {
 
 
         resource = getClass().getClassLoader().getResourceAsStream("hulp.txt");
+      //  HelloApplication.getSplash().getScene().setRoot(view.getHulp());
+        //HelloApplication.getSplash().initModality(Modality.WINDOW_MODAL);
+      //  HelloApplication.getSplash().initStyle(StageStyle.DECORATED);
 
+       menuStage.setScene(null);
+       VBox vboxVoorScene = new VBox(200);
+        Scene scene2 = new Scene(vboxVoorScene,500,600);
+           menuStage.setScene(scene2);
 
-    }
+        view.getHulp().getChildren().clear();
+
     try (InputStreamReader streamReader =
                  new InputStreamReader(resource, StandardCharsets.UTF_8);
          BufferedReader reader = new BufferedReader(streamReader)) {
 
         String line;
+
         while ((line = reader.readLine()) != null) {
             System.out.println(line);
-            view.getHulp().getChildren().add(new Text(line));
 
 
+            Label label=new Label(line);
 
-
+            vboxVoorScene.getChildren().add(label);
         }
-        HelloApplication.getSplash().getScene().setRoot(view.getHulp());
-        HelloApplication.getSplash().initModality(Modality.WINDOW_MODAL);
-        HelloApplication.getSplash().initStyle(StageStyle.DECORATED);
 
-        HelloApplication.getSplash().show();
-        ;
+
+
     } catch (IOException er) {
         er.printStackTrace();
     }
+
+
+            menuStage.setTitle(titel.toLowerCase());
+
+            menuStage.show();
+
+
+
+
+
+    }
+
+
+
+
 
 }));}
 

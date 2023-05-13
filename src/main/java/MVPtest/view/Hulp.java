@@ -2,9 +2,10 @@ package MVPtest.view;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
 
-public class Hulp extends TextFlow {
+public class Hulp extends VBox {
 
   //  private  TextFlow InstructieLijst;
 
@@ -30,7 +31,7 @@ public class Hulp extends TextFlow {
 
     void layoutNodes(){
 
-        this.setLineSpacing(20.0f);
+
 
 
 
