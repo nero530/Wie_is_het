@@ -68,7 +68,7 @@ this.gekozenPersoon1=new Persoon("anoniem",false,false,false,false,false,false, 
 long randomGetal=Math.round(random()*19);
 
         this.gekozenPersoon2=spelbord1.getAllePersonen().get((int) randomGetal);
-//tem.out.println(gekozenPersoon2.getNaam());
+System.out.println(gekozenPersoon2.getNaam());
 }
 
 //Dit is eigenlijk een spelbord method

@@ -298,7 +298,7 @@ public class eerstePresenteer {
                 }
                 else if(view.getBevestigKnop().getText().equals("Ja")||view.titel.getText().contains("computer")) {
 
-                        String verdachte = String.valueOf(view.titel);
+                        String verdachte = view.titel.getText();
                         verdachte = verdachte.replace("Denk je dat ", "");
                         verdachte = verdachte.replace(" de persoon is?", "");
                         // view.getPopupStage().show();
@@ -315,8 +315,8 @@ System.out.println(view.getMenu().getMenus().get(0).getItems().get(2).getText())
                         eindstage.initModality(Modality.APPLICATION_MODAL);
                         eindstage.initStyle(StageStyle.DECORATED);
                         System.out.println(model.getGekozenPersoon2().getNaam());
-                    System.out.println(verdachte);
-                        if (model.getGekozenPersoon2().getNaam().trim().equalsIgnoreCase(verdachte.trim())&&!view.titel.getText().contains("computer")) {
+                    System.out.println(verdachte );
+                        if (model.getGekozenPersoon2().getNaam().trim().equals(verdachte.trim()) &&!view.titel.getText().contains("computer")) {
 
                             eindstage.getTitel().setText("Proficiat je hebt gewonnen");
                             eindstage.setTitle("proficiat");
@@ -486,6 +486,16 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                view.getKnoppenPosEnNeg().setVisible(false);
                view.titel.setText("Welke vraag zou je willen stellen?");
            }
+           else {
+               view.getKnoppenPosEnNeg().getChildren().get(2).setVisible(true);
+
+               PauseTransition delay = new PauseTransition(Duration.seconds(3));
+               delay.setOnFinished(e-> {
+                   view.getKnoppenPosEnNeg().getChildren().get(2).setVisible(false);; });
+               delay.play();
+
+
+           }
        }
    }
 
@@ -570,6 +580,7 @@ model.setGekozenPersoon1(new Persoon());
                 view.getMijnKaartje().setVisible(false);
                 this.view.getKnoppenPosEnNeg().setVisible(false);
                 this.view.getBevestigKnop().setVisible(true);
+            this.view.getBevestigKnop().setText("Bevestigen");
             view.getAangeduideKaartje().setVisible(false);;
 
         ;
