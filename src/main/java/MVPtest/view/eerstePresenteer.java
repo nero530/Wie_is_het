@@ -5,6 +5,7 @@ import MVPtest.model.Persoon;
 import MVPtest.model.Spel;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -291,7 +292,7 @@ public class eerstePresenteer {
                         System.out.println(antwoord);
                       if(antwoord){    view.titel.setText("Ja");}
                       else{view.titel.setText("Nee");}
-                        view.getBevestigKnop().setText("Klaar met bord"); // gewijzigd
+                        view.getBevestigKnop().setText("Klaar met bord");
                       view.getVragen().setVisible(false);
 
                     }
@@ -301,17 +302,25 @@ public class eerstePresenteer {
                         String verdachte = view.titel.getText();
                         verdachte = verdachte.replace("Denk je dat ", "");
                         verdachte = verdachte.replace(" de persoon is?", "");
-                        // view.getPopupStage().show();
+
+
+
                         PopupStage eindstage = new PopupStage();
                         eindstage.getOpnieuw().setOnAction(e->{
 
-                          Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(2),new ActionEvent());
                             eindstage.close();
+                        Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(2),new ActionEvent());
+                        } )  ;
+
+                    eindstage.getStoppen().setOnAction(e->{
 
 
-System.out.println(view.getMenu().getMenus().get(0).getItems().get(2).getText());
+                        Platform.exit();
+                    } )  ;
 
-                } )  ;;
+
+
+
                         eindstage.initModality(Modality.APPLICATION_MODAL);
                         eindstage.initStyle(StageStyle.DECORATED);
                         System.out.println(model.getGekozenPersoon2().getNaam());
@@ -332,7 +341,7 @@ System.out.println(view.getMenu().getMenus().get(0).getItems().get(2).getText())
 
                    eindstage.showAndWait();
                     System.out.println( model.getGekozenPersoon2().getNaam());
-                  //  view.titel.setText("Denk je dat " + erStaatErNogMaarEenRecht + " de persoon is?");
+
 
 
                 }
@@ -346,13 +355,27 @@ System.out.println(view.getMenu().getMenus().get(0).getItems().get(2).getText())
                                if(vraagComputer[0].contains("computer")) {
                                    PopupStage eindstage = new PopupStage();
                                    eindstage.getOpnieuw().setOnAction(j->
-             {                           Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(2),new ActionEvent());  ;
+             {
+                eindstage.close();
+                 Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(2),new ActionEvent());  ;
 
 
 
                  System.out.println(view.getMenu().getMenus().get(0).getItems().get(2).getText());
 
-                                       } );
+                                       });
+                                           eindstage.getStoppen().setOnAction(j->
+                                           {
+
+                                                 Platform.exit();
+
+
+
+
+
+                                           }
+
+                                       );
                                 eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
                                 eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase() + ".png"));
                                 eindstage.setTitle("Oei je hebt verloren");
@@ -573,8 +596,8 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
 model.setGekozenPersoon2(model.getSpelbord1().getAllePersonen().get((int) (Math.random() * 19)));
 model.setGekozenPersoon1(new Persoon());
 
-                Arrays.fill(model.getSpelbord1().getMogelijk(), false);
-                Arrays.fill(model.getSpelbord2().getMogelijk(), false);
+                Arrays.fill(model.getSpelbord1().getMogelijk(), true);
+                Arrays.fill(model.getSpelbord2().getMogelijk(), true);
                 view.getVragen().setVisible(false);
                 view.titel.setText("Kies een kaart");
                 view.getMijnKaartje().setVisible(false);

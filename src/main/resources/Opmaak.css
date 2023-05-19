@@ -35,6 +35,29 @@
 -fx-margin:50;
 -fx-border-radius:50%;
 
+}
 
+.vragenButton{
+-fx-background-color:"#eef1ff";
+-fx-margin:40px;
+ -fx-background-radius:25%;
+-fx-border-radius:25%;
+-fx-border-width:3px;
+-fx-border-color:purple;
+
+  -fx-focus-color: red;
+    -fx-faint-focus-color: #ff000022;
+}
+
+.vragenButton:pressed{
+-fx-background-color:"green";
 
 }
+
+
+
+.vragenButton:hover{
+-fx-background-color:"yellow";
+-fx-cursor:"Hand"
+}
+
