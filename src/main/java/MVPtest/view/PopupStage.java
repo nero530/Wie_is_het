@@ -23,7 +23,7 @@ public class PopupStage extends Stage {
 private BorderPane rootNode = new BorderPane();
 private Text titel;
 
-private ImageView afbeelding;
+    private ImageView afbeelding;
 
     public HBox getOpnieuwOfStoppen() {
         return opnieuwOfStoppen;
@@ -123,6 +123,11 @@ void layoutNodes(){
 
     rootNode.setTop(titel);
     opnieuwOfStoppen.getChildren().addAll(opnieuw,stoppen);
+    opnieuwOfStoppen.spacingProperty().bind(rootNode.widthProperty().divide(3));
+    rootNode.setAlignment(opnieuwOfStoppen,Pos.CENTER);
+ //   opnieuwOfStoppen.prefWidthProperty().bind(rootNode.widthProperty().divide(1.3));
+    //BorderPane.setAlignment(opnieuwOfStoppen,Pos.CENTER);
+    //rootNode.prefWidthProperty().bind(rootNode.getScene().getWindow().widthProperty().divide(1.5));
     rootNode.setBottom(opnieuwOfStoppen);
     rootNode.setCenter(afbeelding);
     rootNode.setAlignment(afbeelding,Pos.CENTER);

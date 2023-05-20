@@ -31,7 +31,7 @@ public class Hulp extends VBox {
 
     void layoutNodes(){
 
-
+this.setSpacing(0);
 
 
 

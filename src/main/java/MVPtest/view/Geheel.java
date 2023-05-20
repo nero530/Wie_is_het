@@ -5,15 +5,11 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 //import javafx.scene.layout.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextFlow;
+import javafx.util.Duration;
 
 public class Geheel extends GridPane {
     public void setBord(TilePane bord) {
@@ -34,10 +30,21 @@ public class Geheel extends GridPane {
 
     private GridPane knoppenPosEnNeg;
 
-  private  GridPane verzamelElement=new VerzamelElement();
+  private BorderPane verzamelElement=new VerzamelElement();
     private MenuBar menu;
 
     private PopupStage popupStage;
+
+
+    public Tooltip getBevestigKnopTooltip() {
+        return bevestigKnopTooltip;
+    }
+
+    public void setBevestigKnopTooltip(Tooltip bevestigKnopTooltip) {
+        this.bevestigKnopTooltip = bevestigKnopTooltip;
+    }
+
+    private Tooltip bevestigKnopTooltip;
 
 private VBox hulp;
 
@@ -67,9 +74,12 @@ private VBox hulp;
         this.aangeduideKaartje=new MijnKaartje();
         this.vragen=new Vragen();
         this.bevestigKnop=new Button("bevestig Keuze");
-    this.knoppenPosEnNeg=new KnoppenPosEnNeg();
+        this.bevestigKnopTooltip=new Tooltip("Klik op het bord om een kaartje te kiezen");
+        this.knoppenPosEnNeg=new KnoppenPosEnNeg();
         this.menu= new Menu2();
-this.hulp= new VBox();
+        this.hulp= new VBox();
+
+
 
     }
 
@@ -92,9 +102,9 @@ this.hulp= new VBox();
     private void layoutNodes() {
         this.bord.setMinWidth(800);
         this.mijnKaartje.setMinWidth(300);
-       mijnKaartje.setAlignment( Pos.CENTER);
+        mijnKaartje.setAlignment( Pos.CENTER);
+    //    bevestigKnop.setTooltip(bevestigKnopTooltip);
 
-       // mijnKaartje.set
         this.label2.setMinWidth(200);
         this.label7.setMinHeight(400);
         titel.setText("Kies een kaart");
@@ -103,31 +113,28 @@ this.hulp= new VBox();
         setHalignment(titel,HPos.CENTER);
         setValignment(titel, VPos.CENTER);
         setMargin(titel,new Insets(20,0,0,10));
-        // setPercentWidth
         this.add(label1,0,0);
         this.add(label2,1,0);
-setHalignment(bevestigKnop,HPos.CENTER);
-setValignment(bevestigKnop,VPos.TOP);
-setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
+        setHalignment(bevestigKnop,HPos.CENTER);
+        setValignment(bevestigKnop,VPos.TOP);
+        setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
+        bevestigKnop.getStyleClass().add("bevestiginsbuttonDisabled");
+        bevestigKnopTooltip.setShowDelay(Duration.millis(0));
+       // bevestigKnopTooltip.setHideDelay(Duration.INDEFINITE);
+
+        bevestigKnop.setTooltip(bevestigKnopTooltip);
         this.add(bevestigKnop,2,2);
         this.add(titel,2,0);
         this.add(label5,1,1);
         this.add(label6,1,2);
         knoppenPosEnNeg.setVisible(false);
-       // setMargin(knoppenPosEnNeg,new Insets(250,0,0,0));
         this.add(knoppenPosEnNeg,2,2);
-
-
         popupStage=new PopupStage();
-
         mijnKaartje.setMouseTransparent(true);
-
-
 
         this.add(menu,4,0);
         setHalignment(menu,HPos.RIGHT);
         menu.setMinWidth(35);
-      //  setValignment(menu,VPos.BOTTOM);
 
         this.add(bord,1,1,1,3);
         this.add(mijnKaartje,3,1);
@@ -173,11 +180,11 @@ setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
 
     }
 
-    public GridPane getVerzamelElement() {
+    public BorderPane getVerzamelElement() {
         return verzamelElement;
     }
 
-    public void setVerzamelElement(GridPane verzamelElement) {
+    public void setVerzamelElement(BorderPane verzamelElement) {
         this.verzamelElement = verzamelElement;
     }
     public VBox getHulp() {

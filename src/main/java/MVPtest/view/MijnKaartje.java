@@ -65,14 +65,14 @@ setSpacing(2);
         // naam.setStyle("-fx-text-fill: inputMijnKaartje");
 this.setVisible(false);
 
-this.setStyle("-fx-background-color: blue");
+
 
 
 
         this.setMouseTransparent(true);
       this.getChildren().addAll(naam,fotoPersoon,eenTekst1,eenTekst2,eenTekst3,eenTekst4,eenTekst5,eenTekst6,eenTekst7,eenTekst8,eenTekst9,eenTekst10);
 
-    //    this.getChildren().addAll(naam,fotoPersoon,textFlow);
+
 
 
     }

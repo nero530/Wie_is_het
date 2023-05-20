@@ -33,6 +33,7 @@ public class Bord extends TilePane {
          persoon.setUserData(Integer.toString(i));
 persoon.getFotoPersoon().setId(Integer.toString(i));
          persoon.getFotoPersoon().setUserData(Integer.toString(i));
+         persoon.getStyleClass().add("persoon");
          this.getChildren().addAll(persoon);
      }
 //TilePane.setFill(Color.BLUE);

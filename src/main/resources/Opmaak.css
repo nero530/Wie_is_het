@@ -57,7 +57,42 @@
 
 
 .vragenButton:hover{
--fx-background-color:"yellow";
+-fx-border-color:#8B0000;
+-fx-background-color:"#FF0000";
 -fx-cursor:"Hand"
 }
 
+#focusButton{
+
+-fx-color:#970017;
+-fx-background-color:red!important;
+
+
+}
+
+.hulpVBox{
+
+-fx-padding:15px;
+
+}
+
+.persoon{
+-fx-cursor:hand
+}
+
+.achtergrondTekst{
+
+-fx-font-size:300;
+-fx-font-weight:bold;
+-fx-font-color:white;
+
+
+
+}
+
+.bevestiginsbuttonDisabled{
+-fx-opacity:0.3;
+
+
+
+}
