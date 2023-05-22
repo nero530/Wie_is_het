@@ -29,16 +29,17 @@ public class KnoppenPosEnNeg extends GridPane {
     void initialiseNodes(){
        positief=new Button("Ja");
        negatief=new Button("Nee");
-this.setStyle("-fx-background-color: red");
         foutiefAntwoord=new Text("Ben je daar wel zeker van?");
         foutiefAntwoord.setVisible(false);
     }
     void layoutNodes(){
+positief.getStyleClass().add("positiefEnNegatief");
+negatief.getStyleClass().add("positiefEnNegatief");
 
-
-this.add(positief,0,0);
+        this.add(positief,0,0);
         this.add(negatief,1,0);
-        this.add(foutiefAntwoord,1,1);
+        this.add(foutiefAntwoord,0,1,2,1);
+        foutiefAntwoord.getStyleClass().add("foutiefAntwoord");
         positief.getStyleClass().add("posEnNeg");
         negatief.getStyleClass().add("posEnNeg");
       this.setMargin(positief,new Insets(0,30,0,0));

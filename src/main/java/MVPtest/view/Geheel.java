@@ -117,8 +117,9 @@ private VBox hulp;
         this.add(label2,1,0);
         setHalignment(bevestigKnop,HPos.CENTER);
         setValignment(bevestigKnop,VPos.TOP);
-        setMargin(bevestigKnop, new Insets(250, 0, 0, 0));
+        setMargin(bevestigKnop, new Insets(150, 0, 0, 0));
         bevestigKnop.getStyleClass().add("bevestiginsbuttonDisabled");
+        bevestigKnop.setId("bevestiginsbutton");
         bevestigKnopTooltip.setShowDelay(Duration.millis(0));
        // bevestigKnopTooltip.setHideDelay(Duration.INDEFINITE);
 

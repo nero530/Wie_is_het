@@ -7,7 +7,7 @@ import javafx.scene.text.TextFlow;
 
 public class Hulp extends VBox {
 
-  //  private  TextFlow InstructieLijst;
+
 
 
 

@@ -67,7 +67,7 @@ public class HelloApplication extends Application {
         Spel model=new Spel();
 
         eerstePresenteer presenteer=new eerstePresenteer(view,model);
-        Scene scene = new Scene(view,750,750);
+        Scene scene = new Scene(view,1000,600);
 
         scene.getStylesheets().add("Opmaak.css");
         stage.setTitle("Wie is het?");
@@ -77,7 +77,7 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
        BorderPane verzamelelement=view.getVerzamelElement();
-Scene scene2=new Scene(verzamelelement,600,600);
+Scene scene2=new Scene(verzamelelement,1000,625);
 
 
 splash.setScene(scene2);

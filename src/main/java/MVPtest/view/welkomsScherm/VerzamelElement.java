@@ -32,7 +32,7 @@ wieIsHet=new Image("vraagtekens.jpg");
 
 this.setBackground(new Background(WelkomsAfbeelding));
 WelkomsAfbeelding=new BackgroundImage(wieIsHet, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-        BackgroundSize.DEFAULT);
+        new BackgroundSize(100,100,true,true,true,false));
 
 
 

@@ -37,7 +37,7 @@ public class Persoon extends VBox {
 
         naam.setText("cheeseBurger");
 
-        // naam.setStyle("-fx-text-fill: inputMijnKaartje");
+
 
         naam.setMouseTransparent(true);
 

@@ -1,3 +1,13 @@
+*{
+
+-fx-font-type:"Ariel";
+
+
+
+}
+
+
+
 .hidden{
 -fx-position:absolute;
 -fx-left:-100000000000000px;
@@ -49,24 +59,21 @@
     -fx-faint-focus-color: #ff000022;
 }
 
-.vragenButton:pressed{
--fx-background-color:"green";
 
-}
 
 
 
 .vragenButton:hover{
--fx-border-color:#8B0000;
--fx-background-color:"#FF0000";
+/*-fx-border-color:#8B0000;
+-fx-background-color:"#FF0000";*/
 -fx-cursor:"Hand"
 }
 
 #focusButton{
 
--fx-color:#970017;
--fx-background-color:red!important;
 
+-fx-background-color:RGB(223,245,251)!important;
+-fx-border-color:#0000EF;
 
 }
 
@@ -91,8 +98,42 @@
 }
 
 .bevestiginsbuttonDisabled{
--fx-opacity:0.3;
+-fx-opacity:0.3!important;
 
 
 
 }
+
+.bord{
+-fx-font-size:19;
+-fx-margin:0,0,50,30;
+}
+
+.positiefEnNegatief{
+
+-fx-cursor: hand;
+-fx-focus-color: transparent!important;
+-fx-font-weight:bold;
+-fx-padding:30;
+  -fx-background-insets: 10000000, 1000000000, 1, 2;
+
+  }
+
+  .foutiefAntwoord{
+-fx-font-size: 18;
+
+
+
+  }
+
+  #bevestiginsbutton{
+
+  -fx-cursor: hand;
+  -fx-focus-color: transparent;
+  -fx-font-weight:bold;
+  -fx-padding:30;
+    -fx-background-insets: 10000000, 1000000000, 1, 2;
+
+
+
+  }
