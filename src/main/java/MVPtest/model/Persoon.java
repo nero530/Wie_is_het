@@ -97,7 +97,7 @@ this.oogkleur=oogkleur;
 
  public Persoon(){
   this.naam="anoniem";
-  vrouw=false;
+  this.vrouw=false;
   this.bril=false;
   this.kaal=false;
   this.hoofddeksel=false;

@@ -52,9 +52,9 @@ public class Menu2 extends MenuBar{
            // bewaren.setUserData(bewaren);
             // toggleGroup.getToggles().addAll(auteurs,Hulp,nieuwSpel,bewaren);
             mijnMenu=new Menu("Menu");
-          /* menuImageview.setFitWidth(40);
-            menuImageview.setFitHeight(40);*/
-afbeelding.setGraphic(menuImageview);
+           menuImageview.setFitWidth(40);
+            menuImageview.setFitHeight(40);
+mijnMenu.setGraphic(menuImageview);
 
             mijnMenu.getItems().addAll(hulp,nieuwSpel);
           //  mijnMenu.setGraphic(menuImageview);
@@ -66,8 +66,8 @@ afbeelding.setGraphic(menuImageview);
         }
 
         private void layoutNodes(){
-this.setMaxWidth(100);
-this.getStyleClass().add("uitgeschakeld");
+this.setMinWidth(130);
+
       this.getMenus().add(mijnMenu);
 
         }

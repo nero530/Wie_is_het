@@ -103,7 +103,6 @@ private VBox hulp;
         this.bord.setMinWidth(800);
         this.mijnKaartje.setMinWidth(300);
         mijnKaartje.setAlignment( Pos.CENTER);
-    //    bevestigKnop.setTooltip(bevestigKnopTooltip);
 
         this.label2.setMinWidth(200);
         this.label7.setMinHeight(400);
@@ -121,7 +120,6 @@ private VBox hulp;
         bevestigKnop.getStyleClass().add("bevestiginsbuttonDisabled");
         bevestigKnop.setId("bevestiginsbutton");
         bevestigKnopTooltip.setShowDelay(Duration.millis(0));
-       // bevestigKnopTooltip.setHideDelay(Duration.INDEFINITE);
 
         bevestigKnop.setTooltip(bevestigKnopTooltip);
         this.add(bevestigKnop,2,2);
@@ -133,15 +131,18 @@ private VBox hulp;
         popupStage=new PopupStage();
         mijnKaartje.setMouseTransparent(true);
 
-        this.add(menu,4,0);
-        setHalignment(menu,HPos.RIGHT);
-        menu.setMinWidth(35);
+        this.add(menu,4,0,1,1);
+    setHalignment(menu,HPos.RIGHT);
 
-        this.add(bord,1,1,1,3);
+
+       menu.setMinWidth(45);
+
+//i2 was 1
+        this.add(bord,1,0,1,3);
+        setValignment(bord,VPos.CENTER);
         this.add(mijnKaartje,3,1);
         aangeduideKaartje.setAlignment(Pos.CENTER);
         this.add(aangeduideKaartje,3,2);
-        // @BUG
         this.vragen.setVisible(false);
         setValignment(vragen,VPos.TOP);
         setMargin(vragen,new Insets(30,0,0,50));

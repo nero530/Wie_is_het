@@ -51,7 +51,7 @@ import static java.lang.Boolean.parseBoolean;
 
 public class eerstePresenteer {
     private final Geheel view;
-    private Spel model;
+    private final Spel model;
 
     public eerstePresenteer(Geheel view,Spel model) {
         this.model=model;
@@ -67,15 +67,7 @@ public class eerstePresenteer {
 
 
     private void addEventFilters() {
-/*view.getScene().getWindow().addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-    @Override
-    public void handle(MouseEvent mouseEvent) {
-        System.out.println("mouse click detected! " + mouseEvent.getSource());
-    }
 
-
-
-    });*/
 
     }
 
@@ -169,7 +161,7 @@ public class eerstePresenteer {
 
                             ImageKaartje.setImage(new Image(model.getGekozenPersoon1().getNaam().toLowerCase() + ".png"));
                             ImageKaartje.setVisible(true);
-//Hier ook de foto Aanpassen
+
                         }
                         //getter voor titel
                         else if ((view.titel.getText().equals("ja") || view.titel.getText().equals("Nee") || view.getBevestigKnop().getText().equals("Klaar met bord") || view.getBevestigKnop().getText().equals("Ja")) && (view.titel.getText().charAt(view.titel.getText().length() - 1) != '?' && view.titel.getText().charAt(view.titel.getText().length() - 1) != '!' || view.getBevestigKnop().getText().equalsIgnoreCase("ja"))) {
@@ -283,18 +275,22 @@ public class eerstePresenteer {
         bevestigbutton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event) {
-                //Maak getter voor titel
-              //  System.out.println("JA");
-
+                //de titel heeft geen getter...
 
 
                 if(view.titel.getText().equals("Kies een kaart")&&!model.getGekozenPersoon1().getNaam().equals("anoniem")){
 
                     view.titel.setText("Welke vraag zou je willen stellen?");
                     view.getVragen().setVisible(true);
+
+                   Text foutmelding= (Text)view.getKnoppenPosEnNeg().getChildren().get(2);
+                           System.out.println(foutmelding.getText());
+                            foutmelding.setVisible(false);
+                    System.out.println("gewijzigd");
                    view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
                    view.getBevestigKnop().getStyleClass().add("bevestiginsbuttonDisabled");
-                   System.out.println("???");
+                    view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
+
                 }
                 else if(view.titel.getText().equals("Welke vraag zou je willen stellen?")){
 
@@ -310,7 +306,7 @@ public class eerstePresenteer {
 
 
 
-                     // System.out.println(model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString()));
+
                       boolean antwoord= model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString());
                         System.out.println(antwoord);
                       if(antwoord){    view.titel.setText("Ja");}
@@ -362,8 +358,8 @@ public class eerstePresenteer {
 
                     eindstage.getStoppen().setOnAction(e->{
 
+Platform.runLater(() -> Platform.exit());
 
-                        Platform.exit();
                     } )  ;
 
 
@@ -411,6 +407,7 @@ public class eerstePresenteer {
                                 bevestigbutton.setVisible(false);
                                 Button positief= (Button) view.getKnoppenPosEnNeg().getChildren().get(0);
                                 Button negatief= (Button) view.getKnoppenPosEnNeg().getChildren().get(1);
+                                Text foutmelding= (Text) view.getKnoppenPosEnNeg().getChildren().get(2);
 
                                 if( parseBoolean(vraagComputer[1])) {
                                      positief.setUserData(false);
@@ -423,7 +420,7 @@ public class eerstePresenteer {
 
                                 }
 
-
+                                foutmelding.setVisible(false);
                                 view.getKnoppenPosEnNeg().setVisible(true);
 
                             } catch (IllegalAccessException e) {
@@ -463,13 +460,7 @@ Button bevestigknop=view.getBevestigKnop();
 
                                Node gezocht=  KnoppenStylenopKlik.getScene().lookup("#focusButton");
 
-                                BooleanBinding isEreenKnopAangeduid = new SimpleBooleanProperty(gezocht!=null).not();
-                              //  Boolean  = new ObservableBooleanProperty();
-                              // bevestigknop.disableProperty().bind(Bindings.or(gezocht!=null)
 
-
-
-                               ;
                                 if(gezocht==null){
                                     target.setId("focusButton");
 
@@ -486,14 +477,14 @@ Button bevestigknop=view.getBevestigKnop();
                                     gezocht.setId("");
 
                                 }
-                                System.out.println(gezocht);
+
                                 final Node vraagGekozen=  view.getBevestigKnop().getScene().lookup("#focusButton");
 
 
                                 if(vraagGekozen==null){
                                     bevestigknop.setTooltip(view.getBevestigKnopTooltip());
                                     bevestigknop.getStyleClass().add("bevestiginsbuttonDisabled");
-
+                                    bevestigknop.setTooltip(view.getBevestigKnopTooltip());
                                 }
                                 else{
 
@@ -505,8 +496,6 @@ Button bevestigknop=view.getBevestigKnop();
                                 }
 
 
-
-                            System.out.println("geklikt");
                             }
 
 
@@ -521,7 +510,6 @@ Button bevestigknop=view.getBevestigKnop();
                     @Override
                     public void handle(MouseEvent event) {
 
-                        //System.out.println(event.getSource().toString().split("'")[1]);
                         view.getBevestigKnop().setUserData(event.getSource().toString().split("'")[1]);
 
                         Button target= (Button) event.getSource();
@@ -549,7 +537,7 @@ Button bevestigknop=view.getBevestigKnop();
                         if(vraagGekozen==null){
                             bevestigknop.setTooltip(view.getBevestigKnopTooltip());
                             bevestigknop.getStyleClass().add("bevestiginsbuttonDisabled");
-
+                            bevestigknop.setTooltip(view.getBevestigKnopTooltip());
                         }
                         else{
 
@@ -560,7 +548,7 @@ Button bevestigknop=view.getBevestigKnop();
 
                         }
 
-                        // System.out.println(bevestigbutton.getUserData());
+
                     }
 
 
@@ -592,7 +580,7 @@ Button bevestigknop=view.getBevestigKnop();
                                                 view.getBevestigKnop().setVisible(true);
                                                if(!view.getBevestigKnop().getStyleClass().contains("bevestiginsbuttonDisabled")){
                                                    view.getBevestigKnop().getStyleClass().add("bevestiginsbuttonDisabled");
-
+                                                   view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
 
 
                                                }
@@ -607,7 +595,8 @@ Button bevestigknop=view.getBevestigKnop();
 
                                                PauseTransition delay = new PauseTransition(Duration.seconds(3));
                                                delay.setOnFinished(e-> {
-                                                   view.getKnoppenPosEnNeg().getChildren().get(2).setVisible(false);; });
+                                                   if(view.getKnoppenPosEnNeg().getChildren().get(2).isVisible()){
+                                                   view.getKnoppenPosEnNeg().getChildren().get(2).setVisible(false);;} });
                                                delay.play();
 
                                            }
@@ -622,6 +611,12 @@ Button bevestigknop=view.getBevestigKnop();
            if(parseBoolean(target.getUserData().toString())){
                view.getBevestigKnop().setVisible(true);
                view.getVragen().setVisible(true);
+               if(!view.getBevestigKnop().getStyleClass().contains("bevestiginsbuttonDisabled")){
+
+                   view.getBevestigKnop().getStyleClass().add("bevestiginsbuttonDisabled");
+                   view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
+
+               }
                view.getKnoppenPosEnNeg().setVisible(false);
                view.titel.setText("Welke vraag zou je willen stellen?");
            }
@@ -717,17 +712,26 @@ model.setGekozenPersoon1(new Persoon());
                 view.getVragen().setVisible(false);
                 view.titel.setText("Kies een kaart");
                 view.getMijnKaartje().setVisible(false);
-                view.getKnoppenPosEnNeg().setVisible(false);
+
                 view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
                 view.getBevestigKnopTooltip().setText("Klik op het bord om een kaartje te kiezen");
-            view.getBevestigKnop().setVisible(true);
+
+               //Ja dit is echt noodzakelijk...
+                Platform.runLater(new Runnable() {
+               @Override
+               public void run() {
+                   view.getBevestigKnop().setVisible(true);
+                   view.getKnoppenPosEnNeg().setVisible(false);
+
+               }
+                             });
+            System.out.println(view.getBevestigKnop().isVisible());
             view.getBevestigKnop().setText("Bevestigen");
             if(!view.getBevestigKnop().getStyleClass().contains("bevestiginsbuttonDisabled") ){
 
                 view.getBevestigKnop().getStyleClass().add("bevestiginsbuttonDisabled");
-                System.out.println(view.getBevestigKnop().getStyleClass());
-            }
 
+            }
 
                 view.getAangeduideKaartje().setVisible(false);;
             final Node gezocht=  view.getBevestigKnop().getScene().lookup("#focusButton");
@@ -756,6 +760,7 @@ if(gezocht!=null){
  for(int i=0;i<20;i++) {
      String tekst=model.getSpelbord1().getAllePersonen().get(i).getNaam();
      VBox X =(VBox)(view.getBord().getChildren().get(i));
+
      Text bordnaam=(Text)X.getChildren().get(0);
      bordnaam.setText(tekst);
      ImageView fotoBord= (ImageView)X.getChildren().get(1);

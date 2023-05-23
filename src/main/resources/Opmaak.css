@@ -84,7 +84,9 @@
 }
 
 .persoon{
--fx-cursor:hand
+-fx-cursor:hand;
+-fx-margin:0;
+-fx-padding:0;
 }
 
 .achtergrondTekst{
@@ -105,8 +107,8 @@
 }
 
 .bord{
--fx-font-size:19;
--fx-margin:0,0,50,30;
+-fx-font-size:15;
+/*-fx-margin:0,0,30,30;*/
 }
 
 .positiefEnNegatief{
@@ -137,3 +139,28 @@
 
 
   }
+
+.menu-bar .label {
+-fx-content-display:top;
+
+}
+
+.menu-item:focused {
+-fx-color:black!important;
+-fx-background-color:white!important;
+
+-fx-cursor:hand;
+}
+
+.menu:focused {
+-fx-color:black!important;
+-fx-background-color:white!important;
+
+-fx-cursor:hand;
+}
+.menu-bar:focused {
+-fx-color:black!important;
+-fx-background-color:white!important;
+
+-fx-cursor:hand;
+}
