@@ -137,7 +137,7 @@ private VBox hulp;
 
        menu.setMinWidth(45);
 
-//i2 was 1
+
         this.add(bord,1,0,1,3);
         setValignment(bord,VPos.CENTER);
         this.add(mijnKaartje,3,1);

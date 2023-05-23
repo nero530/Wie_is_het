@@ -27,10 +27,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
+import javafx.stage.*;
 import javafx.util.Duration;
 import org.w3c.dom.NodeList;
 import javafx.event.ActionEvent;
@@ -133,7 +130,7 @@ public class eerstePresenteer {
                             if (!model.getGekozenPersoon1().isSnor()) {
                                 snor.setText("snor: \uD83D\uDDF8");
                             } else {
-                                snor.setText("hoofddeksel: ❌");
+                                snor.setText("snor: ❌");
                             }
 
 
@@ -326,7 +323,20 @@ public class eerstePresenteer {
 
 
                         PopupStage eindstage = new PopupStage();
+                    eindstage.getOpnieuw().setOnAction(e->{
 
+                        System.out.println(e);
+                        Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(1),new ActionEvent());
+                        eindstage.close();
+                        System.out.println(view.getMenu().getMenus().get(0).getItems().get(1));
+                    } )  ;
+
+                    eindstage.getStoppen().setOnAction(e->{
+                        System.out.println(e);
+
+                        Platform.runLater(() -> Platform.exit());
+
+                    } )  ;
 
 
 
@@ -334,11 +344,14 @@ public class eerstePresenteer {
                         eindstage.initStyle(StageStyle.DECORATED);
                         System.out.println(model.getGekozenPersoon2().getNaam());
                     System.out.println(verdachte );
+                    Stage huidigeScene =(Stage) view.getScene().getWindow();
+                    huidigeScene.setFullScreen(false);
                         if (model.getGekozenPersoon2().getNaam().trim().equals(verdachte.trim()) &&!view.titel.getText().contains("computer")) {
 
                             eindstage.getTitel().setText("Proficiat je hebt gewonnen");
                             eindstage.setTitle("proficiat");
 
+                            eindstage.getAfbeelding().setImage(new Image("gewonnen.jpg"));
                         } else {
                             eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
                             eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase() + ".png"));
@@ -347,20 +360,8 @@ public class eerstePresenteer {
 
 
 
-
+                    eindstage.setOnHiding((e)->huidigeScene.setFullScreen(true));
                    eindstage.showAndWait();
-                    System.out.println( model.getGekozenPersoon2().getNaam());
-                    eindstage.getOpnieuw().setOnAction(e->{
-                        Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(1),new ActionEvent());
-                        eindstage.close();
-
-                    } )  ;
-
-                    eindstage.getStoppen().setOnAction(e->{
-
-Platform.runLater(() -> Platform.exit());
-
-                    } )  ;
 
 
 
@@ -377,6 +378,7 @@ Platform.runLater(() -> Platform.exit());
                                    eindstage.getOpnieuw().setOnAction(j->
              {
                 eindstage.close();
+                System.out.println(j);
                  Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(1),new ActionEvent());  ;
 
 
@@ -385,6 +387,7 @@ Platform.runLater(() -> Platform.exit());
                                        });
                                            eindstage.getStoppen().setOnAction(j->
                                            {
+                                               System.out.println(j);
 
                                                  Platform.exit();
 
@@ -398,7 +401,11 @@ Platform.runLater(() -> Platform.exit());
                                 eindstage.getTitel().setText("Oei... Je hebt verloren \n De computer had " + model.getGekozenPersoon2().getNaam());
                                 eindstage.getAfbeelding().setImage(new Image(model.getGekozenPersoon2().getNaam().toLowerCase() + ".png"));
                                 eindstage.setTitle("Oei je hebt verloren");
+                                   Stage huidigeScene =(Stage) view.getScene().getWindow();
+                                   huidigeScene.setFullScreen(false);
+                                   eindstage.setOnHiding(e->eindstage.close());
                                 eindstage.showAndWait();
+
                             }
 
 
@@ -642,7 +649,7 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
 {
     final MenuItem geklikteMenuItem = (MenuItem) b.getTarget();
     System.out.println(geklikteMenuItem.getUserData());
-    Stage stage = (Stage) view.getScene().getWindow();
+
     File file;
     InputStream resource = null;
     String titel=geklikteMenuItem.getUserData().toString();
@@ -651,12 +658,23 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
     menuStage.initStyle(StageStyle.DECORATED);
 
     if (geklikteMenuItem.getUserData() == "Hulp") {
+   Stage currentStage = (Stage) view.getScene().getWindow();
+   currentStage.setFullScreen(false);
+/*
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                currentStage.setFullScreen(false);
+                currentStage.setMaximized(true);
 
-
+            }
+        });
+        currentStage.setResizable(false);*/
         resource = getClass().getClassLoader().getResourceAsStream("hulp.txt");
 
 
        menuStage.setScene(null);
+
        VBox vboxVoorScene = new VBox(5);
 
         Scene scene2 = new Scene(vboxVoorScene,700,500);
@@ -689,7 +707,35 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
 
             menuStage.setTitle(titel.toLowerCase());
 
-            menuStage.show();
+       //    menuStage.setAlwaysOnTop(true);
+
+                menuStage.showAndWait();
+        System.out.println(currentStage.isFullScreen());
+
+        Platform.runLater(() -> {currentStage.requestFocus(); currentStage.setFullScreen(true);});
+
+/*
+Platform.runLater(new Runnable() {
+    @Override
+    public void run() {
+        currentStage.setHeight(Screen.getPrimary().getBounds().getMaxY());
+        currentStage.setWidth(Screen.getPrimary().getBounds().getMaxX());
+    }
+});
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
 
 
 
@@ -722,9 +768,14 @@ model.setGekozenPersoon1(new Persoon());
                public void run() {
                    view.getBevestigKnop().setVisible(true);
                    view.getKnoppenPosEnNeg().setVisible(false);
+                   view.getBord().getChildren().forEach((i)->{
+                       if(i.getStyleClass().toString().contains("uitgeschakeld")){
 
-               }
-                             });
+                           i.getStyleClass().remove("uitgeschakeld");
+                       }
+
+               });
+                             }});
             System.out.println(view.getBevestigKnop().isVisible());
             view.getBevestigKnop().setText("Bevestigen");
             if(!view.getBevestigKnop().getStyleClass().contains("bevestiginsbuttonDisabled") ){

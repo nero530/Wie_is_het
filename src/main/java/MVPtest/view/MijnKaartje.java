@@ -51,7 +51,6 @@ private Text eenTekst2;
         this.eenTekst9=new Text();
         this.eenTekst10=new Text();
         this.fotoPersoon = new ImageView("Cheeseburger.jpg");
-//this.textFlow=new TextFlow(eenTekst1,eenTekst2,eenTekst3,eenTekst4,eenTekst5,eenTekst6,eenTekst7,eenTekst8,eenTekst9,eenTekst10);
 
 
     }
@@ -59,16 +58,16 @@ private Text eenTekst2;
         fotoPersoon.isPreserveRatio();
         fotoPersoon.setFitHeight(200);
         fotoPersoon.setFitWidth(150);
-       // fotoPersoon.getStyleClass().add("hidden2");
+
         fotoPersoon.setVisible(false);
 setSpacing(2);
-        // naam.setStyle("-fx-text-fill: inputMijnKaartje");
+
 this.setVisible(false);
 
 
 
 
-
+this.getStyleClass().add("mijnKaartje");
         this.setMouseTransparent(true);
       this.getChildren().addAll(naam,fotoPersoon,eenTekst1,eenTekst2,eenTekst3,eenTekst4,eenTekst5,eenTekst6,eenTekst7,eenTekst8,eenTekst9,eenTekst10);
 

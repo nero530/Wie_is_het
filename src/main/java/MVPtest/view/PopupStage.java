@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -129,12 +130,14 @@ void layoutNodes(){
     //BorderPane.setAlignment(opnieuwOfStoppen,Pos.CENTER);
     //rootNode.prefWidthProperty().bind(rootNode.getScene().getWindow().widthProperty().divide(1.5));
     rootNode.setBottom(opnieuwOfStoppen);
+   afbeelding.setFitHeight(new Image("alex.png").getHeight());
+    afbeelding.setFitWidth(new Image("alex.png").getWidth());
+
     rootNode.setCenter(afbeelding);
     rootNode.setAlignment(afbeelding,Pos.CENTER);
     rootNode.setPadding(new Insets(10,10,10,10));
 
     popupScene=new Scene(rootNode,400,400);
-
 
 
        this.setScene(getPopupScene());

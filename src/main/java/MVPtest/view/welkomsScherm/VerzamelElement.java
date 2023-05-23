@@ -4,6 +4,8 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class VerzamelElement extends BorderPane {
@@ -25,7 +27,7 @@ public VerzamelElement(){
 public void initialiseNodes(){
 
     Begroeting=new Text("Wie\n  is \nhet?");
-    Auteurs = new Text("Eliah Verbeemen"); //Miss volledige naam
+    Auteurs = new Text("Eliah Verbeemen");
 
 
 wieIsHet=new Image("vraagtekens.jpg");
@@ -39,20 +41,23 @@ WelkomsAfbeelding=new BackgroundImage(wieIsHet, BackgroundRepeat.REPEAT, Backgro
 }
 
 public void layoutNodes(){
-   /* WelkomsAfbeelding.setImage(wieIsHet);
-    WelkomsAfbeelding.setFitWidth(100);
 
-WelkomsAfbeelding.isPreserveRatio();*/
 Begroeting.getStyleClass().add("achtergrondTekst");
 Begroeting.setStyle("-fx-font-weight: bold;");
-    Begroeting.setStyle("-fx-font-size: 100;");
+Begroeting.setStyle("-fx-font-size: 100;");
 this.setCenter(Begroeting);
 this.setBackground(new Background(WelkomsAfbeelding));
 BorderPane.setAlignment(Auteurs, Pos.BOTTOM_RIGHT);
-this.setBottom(Auteurs);
-//this.add(WelkomsAfbeelding,3,1,1,1);
+//heb deze classe in verkeerde map gestoken
+    Auteurs.setFill(Color.WHITE);
+Auteurs.setStyle("-fx-font-weight:bold;");
 
-//Afsluitknop spel voorzien
+Auteurs.setStyle("-fx-font-size:25");
+
+
+
+
+this.setBottom(Auteurs);
 
 
 

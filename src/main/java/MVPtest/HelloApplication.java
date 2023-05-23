@@ -18,8 +18,10 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.beans.value.ObservableObjectValue;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -109,6 +111,34 @@ splash.initStyle(StageStyle.UNDECORATED);
        // view.getBevestigKnop().disableProperty().bind(Bindings.or(view.getMijnKaartje().visibleProperty().not(),(isEreenPersoonAanwezig.or(isEreenKnopAangeduid.not()))));
        // BooleanBinding debinding = view.getMijnKaartje().visibleProperty().or(Bindings.isNotNull(view.getBevestigKnop().getScene().lookup("#focusButton")));
       //  createButton.disableProperty().bind(accountBind);
+
+       stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+
+                if(t1){
+
+                    if(!stage.isFullScreen()) {
+                        stage.setFullScreen(true);
+
+                    }
+
+
+                    }
+                    else if(stage.getHeight()<50){
+                        System.out.println("maximum");
+                        stage.setMaximized(true);
+
+                };
+            }
+
+
+        });
+
+
+
+
 
 
 scene.setOnKeyPressed(new EventHandler<KeyEvent>() {

@@ -146,21 +146,21 @@
 }
 
 .menu-item:focused {
--fx-color:black!important;
--fx-background-color:white!important;
+-fx-color:white!important;
+-fx-background-color:RGB(49, 78, 130)!important;
 
 -fx-cursor:hand;
 }
 
-.menu:focused {
--fx-color:black!important;
--fx-background-color:white!important;
 
--fx-cursor:hand;
-}
 .menu-bar:focused {
--fx-color:black!important;
--fx-background-color:white!important;
+-fx-color:purple!important;
+-fx-background-color:blue!important;
 
 -fx-cursor:hand;
+}
+.auteurs{
+-fx-font-weight:bold;
+-fx-font-color:white;
+-fx-font-size:25;
 }
