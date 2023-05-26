@@ -25,7 +25,7 @@ private Button haarKleurBruin;
 private HBox haarKleuren;
 private HBox oogKleuren;
 
-// Dit deel van de view representeert de vragenknoppen (bovenaan midden)
+// Dit deel van de view representeert de vragenknoppen (bovenaan midden view)
 
     public Vragen() {
 
@@ -46,9 +46,7 @@ private HBox oogKleuren;
         oogkleurGrijs=new Button("Grijs");
         vraagAcht=new Label("Is de haarkleur...?");
         haarKleurBlond=new Button("blond");
-
         haarKleurZwart=new Button("zwart");
-        //haarKleurZwart.setStyle("-fx-background-color: yellow");
         haarKleurBruin=new Button("bruin");
         oogKleuren=new HBox(oogkleurBlauw,oogkleurBruin,oogkleurGrijs);
         haarKleuren=new HBox(haarKleurBlond,haarKleurZwart,haarKleurBruin);

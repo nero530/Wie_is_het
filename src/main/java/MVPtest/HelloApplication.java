@@ -63,85 +63,34 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         splash=new Stage();
         Geheel view=new Geheel();
-
-
-
         Spel model=new Spel();
-
         eerstePresenteer presenteer=new eerstePresenteer(view,model);
         Scene scene = new Scene(view,1000,600);
-
         scene.getStylesheets().add("Opmaak.css");
         stage.setTitle("Wie is het?");
-        //stage.setFullScreen(true);
         stage.setResizable(true);
-
         stage.setScene(scene);
         stage.show();
        BorderPane verzamelelement=view.getVerzamelElement();
-Scene scene2=new Scene(verzamelelement,1000,625);
-
-
-splash.setScene(scene2);
+        Scene scene2=new Scene(verzamelelement,1000,625);
+        splash.setScene(scene2);
         splash.initOwner(stage);
-splash.initStyle(StageStyle.UNDECORATED);
+        splash.initStyle(StageStyle.UNDECORATED);
         splash.initModality(Modality.APPLICATION_MODAL);
-//
-
         splash.showAndWait();
-        ObservableBooleanValue gezocht= createBooleanBinding(()->((view.getBevestigKnop().getScene().lookup("#focusButton")!=null)));
-        ObservableBooleanValue isEreenPersoonAanwezig = createBooleanBinding(()->(model.getGekozenPersoon1().getNaam().equals("anoniem")));
-        BooleanBinding persoonAangeduid= view.getMijnKaartje().visibleProperty().not();
-        //BooleanBinding isEreenKnopAangeduid = new SimpleBooleanProperty(gezocht.isEmpty()).not();
-       // BooleanBinding X=new SimpleBooleanProperty().not().and((isEreenPersoonAanwezig).not().and(isEreenKnopAangeduid));
-        // werkt :view.getBevestigKnop().disableProperty().bind(gezocht);
-     //werkt voor eerste   view.getBevestigKnop().disableProperty().bind(persoonAangeduid);
-       /*  ObjectProperty<Node> node = new SimpleObjectProperty<>((view.getBevestigKnop().getScene().lookup("#focusButton")));
-       BooleanProperty bool=new SimpleBooleanProperty(model.getGekozenPersoon1().getNaam().equals("anoniem"));
-
-        view.getBevestigKnop().disableProperty().bind(persoonAangeduid.or(Bindings.isNotNull(node).and(bool)));
-*/
-      //  tooltip.().bind()
-      // view.getBevestigKnop().disableProperty().bind(createBooleanBinding((()-> view.getMijnKaartje().isVisible()/*||((gezocht).or(isEreenPersoonAanwezig)*/)))
-        /*.or(isEreenPersoonAanwezig.and(gezocht)));
-        System.out.println(gezocht);
-
-      //  view.getBevestigKnop().disableProperty().bind(isEreenKnopAangeduid/*.or(isEreenPersoonAangeduid).not()*/;
-
-       // view.getBevestigKnop().disableProperty().bind(Bindings.or(view.getMijnKaartje().visibleProperty().not(),(isEreenPersoonAanwezig.or(isEreenKnopAangeduid.not()))));
-       // BooleanBinding debinding = view.getMijnKaartje().visibleProperty().or(Bindings.isNotNull(view.getBevestigKnop().getScene().lookup("#focusButton")));
-      //  createButton.disableProperty().bind(accountBind);
-
-       stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
-
+        stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-
                 if(t1){
-
                     if(!stage.isFullScreen()) {
                         stage.setFullScreen(true);
-
+                    }
                     }
 
-
-                    }
-                    else if(stage.getHeight()<50){
-                        System.out.println("maximum");
-                        stage.setMaximized(true);
-
-                };
             }
-
-
         });
 
-
-
-
-
-
-scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
     final KeyCombination escape = new KeyCodeCombination(KeyCode.ESCAPE);
     @Override
@@ -179,18 +128,12 @@ scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
     @Override
     public void init(){
 
-
-
-
         PauseTransition delay = new PauseTransition(Duration.seconds(5));
         delay.setOnFinished(e-> {
-            splash.close(); });
+        splash.close(); });
         delay.play();
 
 
     }
-
-
-
 
 }

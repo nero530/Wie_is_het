@@ -1,16 +1,8 @@
 package MVPtest.view;
-import MVPtest.HelloApplication;
-
 import MVPtest.model.Persoon;
 import MVPtest.model.Spel;
 import javafx.animation.PauseTransition;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -23,25 +15,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 import javafx.util.Duration;
-import org.w3c.dom.NodeList;
-import javafx.event.ActionEvent;
-import org.w3c.dom.traversal.NodeIterator;
-
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.stream.Stream;
+
 
 
 import static java.lang.Boolean.parseBoolean;
@@ -53,7 +33,6 @@ public class eerstePresenteer {
     public eerstePresenteer(Geheel view,Spel model) {
         this.model=model;
         this.view = view;
-        this.addEventFilters();
         this.addEventHandlers();
         this.updateView();
 
@@ -63,14 +42,10 @@ public class eerstePresenteer {
     }
 
 
-    private void addEventFilters() {
-
-
-    }
 
     private void addEventHandlers() {
-        Bord bord = (Bord) view.getBord();
-        bord.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                Bord bord = (Bord) view.getBord();
+                bord.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 String id1;
@@ -85,7 +60,8 @@ public class eerstePresenteer {
                         id = id1.split("]")[0];
                     }
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
-                        System.out.println(event.getClickCount());
+                        //Dubbele klik was ook een optie geweest ipv rechter muisknop
+                        //System.out.println(event.getClickCount());
                         if (view.titel.getText().equals("Kies een kaart")) {
                             view.getBevestigKnop().getStyleClass().remove("bevestiginsbuttonDisabled");
                             view.getBevestigKnop().setTooltip(null);
@@ -154,24 +130,36 @@ public class eerstePresenteer {
                             }
 
                             ImageView ImageKaartje = (ImageView) mijnKaartje.getChildren().get(1);
-
-
                             ImageKaartje.setImage(new Image(model.getGekozenPersoon1().getNaam().toLowerCase() + ".png"));
                             ImageKaartje.setVisible(true);
 
                         }
-                        //getter voor titel
+                        // 1) getter voor titel ontbreekt
+                        // 2) Het spel hieronder is op te delen in fase. Een String property genaamd fase zou regels zoals deze hieronder mijden
+                        //en het schrijven van de code veel gemakkelijker gemaakt hebben.
                         else if ((view.titel.getText().equals("ja") || view.titel.getText().equals("Nee") || view.getBevestigKnop().getText().equals("Klaar met bord") || view.getBevestigKnop().getText().equals("Ja")) && (view.titel.getText().charAt(view.titel.getText().length() - 1) != '?' && view.titel.getText().charAt(view.titel.getText().length() - 1) != '!' || view.getBevestigKnop().getText().equalsIgnoreCase("ja"))) {
-                            System.out.println(view.titel.getText().charAt(view.titel.getText().length() - 1));
-                            //String klasseKaartje= String.valueOf(event.getTarget().getClass());
+                          int aantalUitgeschakeld=0;
+                            for(int i=0;i<view.getBord().getChildren().size();i++ ){
+                                if(view.getBord().getChildren().get(i).getStyleClass().contains("uitgeschakeld")){
+                                  aantalUitgeschakeld++;
+                                }
+
+
+
+                            }
+
+                            if(aantalUitgeschakeld==19&&!view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")){}
+
+
+                            else{
+
                             if (!view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld")) {
                                 view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().add("uitgeschakeld");
-                                // System.out.println(  view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().contains("uitgeschakeld"));
                             } else {
                                 view.getBord().getChildren().get(Integer.parseInt(id)).getStyleClass().remove("uitgeschakeld");
                             }
                             String erStaatErNogMaarEenRecht = model.draaiKaartjeOm(Integer.parseInt(id));
-                            //   String HuidigeTitel=   String.valueOf(view.titel.getText());
+
                             if (!erStaatErNogMaarEenRecht.equals("meerDanEen")) {
                                 view.titel.setUserData(view.titel.getText());
                                 view.titel.setText("Denk je dat " + erStaatErNogMaarEenRecht + " de persoon is?");
@@ -185,7 +173,7 @@ public class eerstePresenteer {
                                 }
                                 view.getBevestigKnop().setText("Klaar met bord");
 
-
+                            }
                             }
                         }
                     }
@@ -281,17 +269,16 @@ public class eerstePresenteer {
                     view.getVragen().setVisible(true);
 
                    Text foutmelding= (Text)view.getKnoppenPosEnNeg().getChildren().get(2);
-                           System.out.println(foutmelding.getText());
-                            foutmelding.setVisible(false);
-                    System.out.println("gewijzigd");
-                   view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
-                   view.getBevestigKnop().getStyleClass().add("bevestiginsbuttonDisabled");
+
+                    foutmelding.setVisible(false);
+                    view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
+                    view.getBevestigKnop().getStyleClass().add("bevestiginsbuttonDisabled");
                     view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
 
                 }
                 else if(view.titel.getText().equals("Welke vraag zou je willen stellen?")){
 
-                  //delayonmiddellijk finishen
+
                     if(view.getBevestigKnop().getUserData()!=null){
                         final Node gezocht=  view.getBevestigKnop().getScene().lookup("#focusButton");
                         if(gezocht!=null){
@@ -305,7 +292,6 @@ public class eerstePresenteer {
 
 
                       boolean antwoord= model.vraagBeantwoorden(view.getBevestigKnop().getUserData().toString());
-                        System.out.println(antwoord);
                       if(antwoord){    view.titel.setText("Ja");}
                       else{view.titel.setText("Nee");}
                         view.getBevestigKnop().setText("Klaar met bord");
@@ -328,13 +314,20 @@ public class eerstePresenteer {
                         System.out.println(e);
                         Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(1),new ActionEvent());
                         eindstage.close();
-                        System.out.println(view.getMenu().getMenus().get(0).getItems().get(1));
+
                     } )  ;
 
                     eindstage.getStoppen().setOnAction(e->{
-                        System.out.println(e);
 
-                        Platform.runLater(() -> Platform.exit());
+
+                        Platform.runLater(() ->{ try{ Platform.exit();} catch (Exception ignored) {
+
+                   //   platform Runlater samen met Platform exit geeft een exception, maar doet zijn werk wel.
+
+                        }
+
+
+                        });
 
                     } )  ;
 
@@ -342,8 +335,7 @@ public class eerstePresenteer {
 
                         eindstage.initModality(Modality.APPLICATION_MODAL);
                         eindstage.initStyle(StageStyle.DECORATED);
-                        System.out.println(model.getGekozenPersoon2().getNaam());
-                    System.out.println(verdachte );
+
                     Stage huidigeScene =(Stage) view.getScene().getWindow();
                     huidigeScene.setFullScreen(false);
                         if (model.getGekozenPersoon2().getNaam().trim().equals(verdachte.trim()) &&!view.titel.getText().contains("computer")) {
@@ -378,7 +370,7 @@ public class eerstePresenteer {
                                    eindstage.getOpnieuw().setOnAction(j->
              {
                 eindstage.close();
-                System.out.println(j);
+                // Een van de mogelijkheden om de hoeveelheid code te beperken
                  Event.fireEvent(view.getMenu().getMenus().get(0).getItems().get(1),new ActionEvent());  ;
 
 
@@ -386,14 +378,7 @@ public class eerstePresenteer {
 
                                        });
                                            eindstage.getStoppen().setOnAction(j->
-                                           {
-                                               System.out.println(j);
-
-                                                 Platform.exit();
-
-
-
-
+                                           {Platform.exit();
 
                                            }
 
@@ -459,7 +444,7 @@ child.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
 
-Button bevestigknop=view.getBevestigKnop();
+                            Button bevestigknop=view.getBevestigKnop();
                             view.getBevestigKnop().setUserData(event.getSource().toString().split("'")[1]);
 
                             GridPane KnoppenStylenopKlik= view.getVragen();
@@ -574,7 +559,7 @@ Button bevestigknop=view.getBevestigKnop();
 
         }
 
-         Button pos= (Button) view.getKnoppenPosEnNeg().getChildren().get(0);
+        Button pos= (Button) view.getKnoppenPosEnNeg().getChildren().get(0);
         Button neg= (Button) view.getKnoppenPosEnNeg().getChildren().get(1);
 
         pos.setOnAction(new EventHandler<ActionEvent>() {
@@ -614,7 +599,7 @@ Button bevestigknop=view.getBevestigKnop();
        @Override
        public void handle(ActionEvent event) {
            final Button target=(Button) event.getTarget();
-           System.out.println(target.getUserData());
+
            if(parseBoolean(target.getUserData().toString())){
                view.getBevestigKnop().setVisible(true);
                view.getVragen().setVisible(true);
@@ -660,39 +645,18 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
     if (geklikteMenuItem.getUserData() == "Hulp") {
    Stage currentStage = (Stage) view.getScene().getWindow();
    currentStage.setFullScreen(false);
-/*
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                currentStage.setFullScreen(false);
-                currentStage.setMaximized(true);
-
-            }
-        });
-        currentStage.setResizable(false);*/
-        resource = getClass().getClassLoader().getResourceAsStream("hulp.txt");
-
-
-       menuStage.setScene(null);
-
-       VBox vboxVoorScene = new VBox(5);
-
-        Scene scene2 = new Scene(vboxVoorScene,700,500);
-        scene2.getStylesheets().add("Opmaak.css");
-           menuStage.setScene(scene2);
-
-        view.getHulp().getChildren().clear();
-
-    try (InputStreamReader streamReader =
-                 new InputStreamReader(resource, StandardCharsets.UTF_8);
-         BufferedReader reader = new BufferedReader(streamReader)) {
-
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-
-
-
+   resource = getClass().getClassLoader().getResourceAsStream("hulp.txt");
+   menuStage.setScene(null);
+   VBox vboxVoorScene = new VBox(5);
+   Scene scene2 = new Scene(vboxVoorScene,700,500);
+   scene2.getStylesheets().add("Opmaak.css");
+   menuStage.setScene(scene2);
+   view.getHulp().getChildren().clear();
+   try (InputStreamReader streamReader =
+    new InputStreamReader(resource, StandardCharsets.UTF_8);
+   BufferedReader reader = new BufferedReader(streamReader)) {
+   String line;
+  while ((line = reader.readLine()) != null) {
             Label label=new Label(line);
 
             vboxVoorScene.getChildren().add(label);
@@ -707,35 +671,14 @@ view.getMenu().getMenus().forEach(e->e.setOnAction(b->
 
             menuStage.setTitle(titel.toLowerCase());
 
-       //    menuStage.setAlwaysOnTop(true);
+
 
                 menuStage.showAndWait();
-        System.out.println(currentStage.isFullScreen());
-
-        Platform.runLater(() -> {currentStage.requestFocus(); currentStage.setFullScreen(true);});
-
-/*
-Platform.runLater(new Runnable() {
-    @Override
-    public void run() {
-        currentStage.setHeight(Screen.getPrimary().getBounds().getMaxY());
-        currentStage.setWidth(Screen.getPrimary().getBounds().getMaxX());
-    }
-});
 
 
-
-
-
-
-
-*/
-
-
-
-
-
-
+        Platform.runLater(() -> {
+            currentStage.requestFocus();
+            currentStage.setFullScreen(true);});
 
 
 
@@ -750,19 +693,15 @@ Platform.runLater(new Runnable() {
                 i.getStyleClass().remove("uitgeschakeld");
             }
 
-model.setGekozenPersoon2(model.getSpelbord1().getAllePersonen().get((int) (Math.random() * 19)));
-model.setGekozenPersoon1(new Persoon());
 
-                Arrays.fill(model.getSpelbord1().getMogelijk(), true);
-                Arrays.fill(model.getSpelbord2().getMogelijk(), true);
+                model.nieuwSpel();
                 view.getVragen().setVisible(false);
                 view.titel.setText("Kies een kaart");
                 view.getMijnKaartje().setVisible(false);
-
                 view.getBevestigKnop().setTooltip(view.getBevestigKnopTooltip());
                 view.getBevestigKnopTooltip().setText("Klik op het bord om een kaartje te kiezen");
 
-               //Ja dit is echt noodzakelijk...
+
                 Platform.runLater(new Runnable() {
                @Override
                public void run() {
@@ -776,7 +715,7 @@ model.setGekozenPersoon1(new Persoon());
 
                });
                              }});
-            System.out.println(view.getBevestigKnop().isVisible());
+
             view.getBevestigKnop().setText("Bevestigen");
             if(!view.getBevestigKnop().getStyleClass().contains("bevestiginsbuttonDisabled") ){
 
@@ -786,7 +725,7 @@ model.setGekozenPersoon1(new Persoon());
 
                 view.getAangeduideKaartje().setVisible(false);;
             final Node gezocht=  view.getBevestigKnop().getScene().lookup("#focusButton");
-if(gezocht!=null){
+        if(gezocht!=null){
             gezocht.setId("");
         }
 
@@ -799,13 +738,6 @@ if(gezocht!=null){
 
 
 
-
-
-
-
-
-
-    //updateView is updaten met modelData
     private void updateView() {
 
  for(int i=0;i<20;i++) {
@@ -820,15 +752,6 @@ if(gezocht!=null){
 
 
  }
-
-
-
-
-
-
-
-
-
 
 
 }

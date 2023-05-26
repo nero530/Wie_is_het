@@ -39,8 +39,8 @@ public class Bord extends TilePane {
 
      }
         this.setVgap(0);
-this.getStyleClass().add("bord");
-this.setAlignment(Pos.CENTER);
+        this.getStyleClass().add("bord");
+        this.setAlignment(Pos.CENTER);
     }
 
 

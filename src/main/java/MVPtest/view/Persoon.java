@@ -66,12 +66,5 @@ public class Persoon extends VBox {
     }
 
 
-
-
-
-
-
-
-
 }
 

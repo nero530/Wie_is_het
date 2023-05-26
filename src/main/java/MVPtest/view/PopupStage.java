@@ -126,19 +126,13 @@ void layoutNodes(){
     opnieuwOfStoppen.getChildren().addAll(opnieuw,stoppen);
     opnieuwOfStoppen.spacingProperty().bind(rootNode.widthProperty().divide(3));
     rootNode.setAlignment(opnieuwOfStoppen,Pos.CENTER);
- //   opnieuwOfStoppen.prefWidthProperty().bind(rootNode.widthProperty().divide(1.3));
-    //BorderPane.setAlignment(opnieuwOfStoppen,Pos.CENTER);
-    //rootNode.prefWidthProperty().bind(rootNode.getScene().getWindow().widthProperty().divide(1.5));
     rootNode.setBottom(opnieuwOfStoppen);
-   afbeelding.setFitHeight(new Image("alex.png").getHeight());
+    afbeelding.setFitHeight(new Image("alex.png").getHeight());
     afbeelding.setFitWidth(new Image("alex.png").getWidth());
-
     rootNode.setCenter(afbeelding);
     rootNode.setAlignment(afbeelding,Pos.CENTER);
     rootNode.setPadding(new Insets(10,10,10,10));
-
     popupScene=new Scene(rootNode,400,400);
-
 
        this.setScene(getPopupScene());
 

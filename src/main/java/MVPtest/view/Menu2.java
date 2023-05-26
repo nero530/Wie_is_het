@@ -17,18 +17,12 @@ public class Menu2 extends MenuBar{
 
         MenuItem hulp = new MenuItem("Hulp");
 
-    public MenuItem getNieuwSpel() {
-        return nieuwSpel;
-    }
 
-    public void setNieuwSpel(MenuItem nieuwSpel) {
-        this.nieuwSpel = nieuwSpel;
-    }
 
     MenuItem nieuwSpel = new MenuItem("nieuw spel");
-       // MenuItem bewaren = new MenuItem("bewaren");
 
-        Menu mijnMenu ;
+
+    Menu mijnMenu ;
 
     ImageView menuImageview;
     Image menuImage;
@@ -49,16 +43,12 @@ public class Menu2 extends MenuBar{
             auteurs.setUserData("auteurs");
             hulp.setUserData("Hulp");
             nieuwSpel.setUserData("nieuwSpel");
-           // bewaren.setUserData(bewaren);
-            // toggleGroup.getToggles().addAll(auteurs,Hulp,nieuwSpel,bewaren);
             mijnMenu=new Menu("Menu");
            menuImageview.setFitWidth(40);
             menuImageview.setFitHeight(40);
 mijnMenu.setGraphic(menuImageview);
 
             mijnMenu.getItems().addAll(hulp,nieuwSpel);
-          //  mijnMenu.setGraphic(menuImageview);
-
 
 
 
@@ -66,12 +56,17 @@ mijnMenu.setGraphic(menuImageview);
         }
 
         private void layoutNodes(){
-this.setMinWidth(130);
-
-      this.getMenus().add(mijnMenu);
+        this.setMinWidth(130);
+        this.getMenus().add(mijnMenu);
 
         }
+    public MenuItem getNieuwSpel() {
+        return nieuwSpel;
+    }
 
+    public void setNieuwSpel(MenuItem nieuwSpel) {
+        this.nieuwSpel = nieuwSpel;
+    }
 
     }
 

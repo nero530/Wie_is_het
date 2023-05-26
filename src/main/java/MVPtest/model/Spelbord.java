@@ -29,8 +29,7 @@ public boolean[] mogelijk= new boolean[20];
     public void setMogelijkComputer(int index) {
      boolean[] mogelijk2=this.mogelijk;
      mogelijk2[index]=false;
-     System.out.println(mogelijk2);
-        this.mogelijk = mogelijk2;
+      this.mogelijk = mogelijk2;
     }
 
 

@@ -11,11 +11,11 @@ import javafx.scene.text.TextFlow;
 import static javafx.scene.text.TextAlignment.JUSTIFY;
 import static javafx.scene.text.TextAlignment.LEFT;
 
-public class MijnKaartje extends VBox {
-private Text naam;
-private ImageView fotoPersoon;
-private Text eenTekst1;
-private Text eenTekst2;
+    public class MijnKaartje extends VBox {
+    private Text naam;
+    private ImageView fotoPersoon;
+    private Text eenTekst1;
+    private Text eenTekst2;
     private Text eenTekst3;
     private Text eenTekst4;
     private Text eenTekst5;
@@ -26,7 +26,6 @@ private Text eenTekst2;
     private Text eenTekst9;
     private Text eenTekst10;
 
-    private  TextFlow textFlow;
 
 
 
@@ -58,22 +57,12 @@ private Text eenTekst2;
         fotoPersoon.isPreserveRatio();
         fotoPersoon.setFitHeight(200);
         fotoPersoon.setFitWidth(150);
-
         fotoPersoon.setVisible(false);
-setSpacing(2);
-
-this.setVisible(false);
-
-
-
-
-this.getStyleClass().add("mijnKaartje");
+        setSpacing(2);
+        this.setVisible(false);
+        this.getStyleClass().add("mijnKaartje");
         this.setMouseTransparent(true);
-      this.getChildren().addAll(naam,fotoPersoon,eenTekst1,eenTekst2,eenTekst3,eenTekst4,eenTekst5,eenTekst6,eenTekst7,eenTekst8,eenTekst9,eenTekst10);
-
-
-
-
+        this.getChildren().addAll(naam,fotoPersoon,eenTekst1,eenTekst2,eenTekst3,eenTekst4,eenTekst5,eenTekst6,eenTekst7,eenTekst8,eenTekst9,eenTekst10);
     }
 
 
